@@ -11,28 +11,34 @@ import java.util.ArrayList;
 
 import com.poo.excecoes.AlunoInexistenteException;
 import com.poo.excecoes.CadastroAlunoExistenteException;
+import com.poo.excecoes.ProcuraAlunoInexistenteException;
 import com.poo.negocios.beans.Aluno;
+import com.poo.negocios.beans.Aluno;
+import com.poo.excecoes.CPFCadastradoExeception;
+
 
 public class RepositorioAluno implements IRepositorioAluno, Serializable{
-	private ArrayList<Aluno> listaDeAlunos;
-	
+	private Aluno[] listaDeAlunos;
+	private int proxima;
+
 	private static RepositorioAluno instance;
-	
-	public RepositorioAluno(){
-		this.listaDeAlunos = new ArrayList<Aluno>();
+
+	public RepositorioAluno(int tamanho){
+		this.listaDeAlunos = new Aluno[tamanho];
+		this.proxima = 0;
 	}
-	
+
 	public static IRepositorioAluno getInstance() throws IOException {
 		if (instance == null) {
 			instance = abrirArquivo();
 		}
 		return instance;
 	}
-	
+
 	private static RepositorioAluno abrirArquivo() throws IOException {
 
 		RepositorioAluno instanciaLocal = null;
-		File in = new File("ARQUIVOS\\CADASTRO ALUNOS\\cadastroalunos.bin");
+		File in = new File("DADOS\\CADASTRO CLIENTES\\cadastroclientes.bin");
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
@@ -41,9 +47,9 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 			Object o = ois.readObject();
 			instanciaLocal = (RepositorioAluno) o;
 		} catch (Exception e) {
-			
-			instanciaLocal = new RepositorioAluno();
-			
+
+			instanciaLocal = new RepositorioAluno(100);
+
 		} finally {
 
 			if (ois != null) {
@@ -57,22 +63,22 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 		return instanciaLocal;
 
 	}
-	
+
 	public static void salvarArquivo() throws IOException {
 
 		if (instance == null) {
 			return;
 		}
 
-		File dir = new File("ARQUIVOS\\CADASTRO ALUNOS");
+		File dir = new File("ARQUIVOS\\CADASTRO CLIENTES");
 		dir.mkdirs();
-		File out = new File(dir,"cadastroalunos.bin");
-        
+		File out = new File(dir,"cadastroclientes.bin");
+
 		if (!out.exists()){
-			
+
 			out.createNewFile();
-        }
-		
+		}
+
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 
@@ -82,9 +88,9 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 			oos.writeObject(instance);
 
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
-			
+
 		} finally {
 			if (oos != null) {
 				try {
@@ -94,51 +100,113 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 			}
 		}
 	}
+
+	public void cadastra(Aluno a) throws IOException, CadastroAlunoExistenteException, CPFCadastradoExeception{
 	
-	/**
-	 * Verifica se um aluno é realmente da faculdade ou não
-	 * 
-	 * @param aluno 
-	 * @return Verdadeiro se for estudante e falso se não for estudante
-	 */
-	public boolean existe(Aluno aluno){
+			if (a != null)
+			if (this.existe(a.getNome())) {
+				throw new CadastroAlunoExistenteException(
+						a.getNome());
+
+			}else if(this.existe(a.getCpf())){
+				throw new CPFCadastradoExeception();
+			}else{
+				this.listaDeAlunos[proxima] = (Aluno) a;
+				this.proxima = this.proxima+1;
+			}
+		if (this.proxima == this.listaDeAlunos.length) {
+
+			this.duplicaArrayCliente();
+		}
+		salvarArquivo();
+
+	}
+
+	public Aluno procurar(String nome)	throws ProcuraAlunoInexistenteException{
+
+		int i = this.procurarIndice(nome);
+		Aluno resultado = null;
+		if (i != this.proxima)
+			resultado = this.listaDeAlunos[i];
+		else throw new ProcuraAlunoInexistenteException(); 
+
+		return  resultado;
+
+	}
+
+
+
+	public boolean existe(String nome) {
+
+		boolean existe = false;
+		int indice = this.procurarIndice(nome);
+		if (indice != proxima) {
+
+			existe = true;
+
+		}
+
+		return existe;
+	}
+
+	public void remover(String nome) throws IOException, ProcuraAlunoInexistenteException {
+
+		int i = this.procurarIndice(nome);
+		if (i != this.proxima) {
+			this.listaDeAlunos[i] = this.listaDeAlunos[this.proxima - 1];
+			this.listaDeAlunos[this.proxima - 1] = null;
+			this.proxima = this.proxima - 1;
+		}else throw new ProcuraAlunoInexistenteException(); 
+
+		salvarArquivo();
+
+	}
+
+	private int procurarIndice(String nome){
+
+		int i = 0;
 		boolean achou = false;
-		for(int i = 0; i<this.listaDeAlunos.size();i++){
-			if(this.listaDeAlunos.get(i).getCpf().equals(aluno.getCpf())){
+
+		while ((!achou) && (i < this.proxima)) {
+			if (nome.equals(this.listaDeAlunos[i].getNome()) || nome.equals(this.listaDeAlunos[i].getCpf())) {
 				achou = true;
+			} else {
+				i = i + 1;
 			}
 		}
-		return achou;
+		return i;
 	}
-	
-	/**
-	 * Adiciona um novo aluno a lista de alunos
-	 * 
-	 * @param aluno
-	 * @throws IOException
-	 * @throws CadastroAlunoExistenteException
-	 */
-	public void inserirAluno(Aluno aluno) throws IOException, CadastroAlunoExistenteException{
-		if(!this.existe(aluno)){
-			this.listaDeAlunos.add(aluno);
-			salvarArquivo();
-		}else{
-			throw new CadastroAlunoExistenteException();
+
+	private void duplicaArrayCliente(){
+
+		if (this.listaDeAlunos != null && this.listaDeAlunos.length > 0) {
+			Aluno[] arrayDuplicado = new Aluno[this.listaDeAlunos.length * 2];
+			for (int i = 0; i < this.listaDeAlunos.length; i++) {
+				arrayDuplicado[i] = this.listaDeAlunos[i];
+			}
+			this.listaDeAlunos = arrayDuplicado;
 		}
 	}
-	
-	public ArrayList<Aluno> listarAlunos(){
-		return this.listaDeAlunos;
+
+	public Aluno[] imprimiAluno() {
+
+		Aluno[] aluno = new Aluno[this.listaDeAlunos.length];
+		int cont = 0;
+		for (Aluno c : aluno) {
+
+			if(c!= null & (c instanceof Aluno)){
+				aluno[cont] = (Aluno) c;
+				cont++;
+			}
+		}
+
+		return aluno;
+
 	}
-	
-	
 
 	@Override
 	public boolean equals(Aluno a, Aluno B) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-	
-	
-	
+	}	
 }
