@@ -2,6 +2,8 @@ package com.poo.negocios.beans;
 
 import java.io.Serializable;
 
+import com.poo.excecoes.RefeicaoInvalidaException;
+
 
 public class Cartao implements Serializable{
 	private String numero;
@@ -10,15 +12,13 @@ public class Cartao implements Serializable{
 	private int via;
 	private double saldo;
 	private Aluno aluno;
-	private int opcao;
-
-	public Cartao(String validade, String emissao, int via, double saldo, Aluno aluno, int opcao){
+	
+	public Cartao(String validade, String emissao, int via, double saldo, Aluno aluno){
 		this.setEmissao(emissao);
 		this.setValidade(validade);
 		this.setVia(via);
 		this.setSaldo(saldo);
 		this.setAluno(aluno);
-		this.setOpcao(opcao);
 	}
 	/**
 	 * Credita(soma um valor) a uma conta
@@ -37,17 +37,30 @@ public class Cartao implements Serializable{
 		}
 		
 	}
+	public String selecionarRefeicão(int opcao) throws RefeicaoInvalidaException{
+		String resultado = "";
+		if(opcao ==1 ){
+			this.debitar(2.0);
+			resultado = "ALMOÇO";
+		}else if(opcao == 2){
+			this.debitar(1.5);
+			resultado = "JANTAR";
+		}else{
+			throw new RefeicaoInvalidaException();
+		}
+		return resultado;
+	}
+	
 
 	public double getSaldo(){
 		return this.saldo;
 	}
-
 	public void setSaldo(double saldo){
 		this.saldo = saldo;
 	}
  
 	public String getNumero() {
-		return numero;
+		return this.numero;
 	}
 
 	public void setNumero(String numero) {
@@ -55,7 +68,7 @@ public class Cartao implements Serializable{
 	}
 
 	public String getValidade() {
-		return validade;
+		return this.validade;
 	}
 
 	public void setValidade(String validade) {
@@ -63,7 +76,7 @@ public class Cartao implements Serializable{
 	}
 
 	public String getEmissao() {
-		return emissao;
+		return this.emissao;
 	}
 
 	public void setEmissao(String emissao) {
@@ -71,7 +84,7 @@ public class Cartao implements Serializable{
 	}
 
 	public int getVia() {
-		return via;
+		return this.via;
 	}
 
 	public void setVia(int via) {
@@ -88,17 +101,8 @@ public class Cartao implements Serializable{
 		}
 	}
 	
-	public int getOpcao(){
-		return this.opcao;
-	}
 	
-	public void setOpcao(int opcao){
-		if(opcao == 1){
-			
-		}else if(opcao == 2){
-			
-		}
-	}
+
 
 	@Override
 	public String toString(){
