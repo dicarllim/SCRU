@@ -10,13 +10,15 @@ public class Cartao implements Serializable{
 	private int via;
 	private double saldo;
 	private Aluno aluno;
+	private int opcao;
 
-	public Cartao(String validade, String emissao, int via, double saldo, Aluno aluno){
+	public Cartao(String validade, String emissao, int via, double saldo, Aluno aluno, int opcao){
 		this.setEmissao(emissao);
 		this.setValidade(validade);
 		this.setVia(via);
 		this.setSaldo(saldo);
 		this.setAluno(aluno);
+		this.setOpcao(opcao);
 	}
 	/**
 	 * Credita(soma um valor) a uma conta
@@ -27,6 +29,13 @@ public class Cartao implements Serializable{
 		if(valor>0){
 			this.saldo += valor;
 		}
+	}
+	
+	public void debitar(double valor){
+		if(valor > 0){
+			this.saldo -= valor;
+		}
+		
 	}
 
 	public double getSaldo(){
@@ -69,13 +78,25 @@ public class Cartao implements Serializable{
 		this.via = via;
 	}
 	
-	public Aluno getALuno(){
+	public Aluno getAluno(){
 		return this.aluno;
 	}
 	
 	public void setAluno(Aluno aluno){
 		if(!aluno.equals(null)){
 			this.aluno = aluno;
+		}
+	}
+	
+	public int getOpcao(){
+		return this.opcao;
+	}
+	
+	public void setOpcao(int opcao){
+		if(opcao == 1){
+			
+		}else if(opcao == 2){
+			
 		}
 	}
 
