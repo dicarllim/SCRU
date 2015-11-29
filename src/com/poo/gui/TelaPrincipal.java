@@ -46,7 +46,7 @@ public class TelaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRestauranteUniversitrio = new JLabel("RESTAURANTE UNIVERSIT√ÅRIO");
+		JLabel lblRestauranteUniversitrio = new JLabel("RESTAURANTE UNIVERSIT¡RIO");
 		lblRestauranteUniversitrio.setForeground(new Color(244, 164, 96));
 		lblRestauranteUniversitrio.setFont(new Font("Georgia", Font.PLAIN, 25));
 		lblRestauranteUniversitrio.setBounds(64, 57, 411, 56);
@@ -69,7 +69,7 @@ public class TelaPrincipal extends JFrame {
 		lblUfrpe.setBounds(223, 103, 71, 16);
 		contentPane.add(lblUfrpe);
 		
-		JLabel lblAtm = new JLabel("ATM¬Æ 2015");
+		JLabel lblAtm = new JLabel("ATMÆ 2015");
 		lblAtm.setForeground(new Color(211, 211, 211));
 		lblAtm.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		lblAtm.setBounds(437, 304, 58, 13);
