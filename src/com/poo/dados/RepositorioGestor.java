@@ -7,19 +7,22 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 
 import com.poo.excecoes.CadastroGestorExistenteException;
+import com.poo.excecoes.ProcuraAlunoInexistenteException;
+import com.poo.excecoes.ProcuraGestorInexistenteException;
 import com.poo.negocios.beans.Gestor;
 
+
 public class RepositorioGestor implements IRepositorioGestor, Serializable{
-	private ArrayList<Gestor> listaDeGestores;
-	
+	private Gestor[] listaDeGestores;
+	private int proxima; //primeira posição vazia do vetor de gestor
 	private static RepositorioGestor instance;
 	
-	public RepositorioGestor(){
-		this.listaDeGestores = new ArrayList<Gestor>();
+	public RepositorioGestor(int tamanho){
+		this.listaDeGestores = new Gestor[tamanho];
+		this.proxima = 0;
 	}
 	
 	public static IRepositorioGestor getInstance() throws IOException {
@@ -32,7 +35,7 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 	private static RepositorioGestor abrirArquivo() throws IOException {
 
 		RepositorioGestor instanciaLocal = null;
-		File in = new File("ARQUIVOS\\CADASTRO GESTORES\\cadastrogestores.bin");
+		File in = new File("DADOS\\CADASTRO GESTORES\\cadastrogestores.bin");
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
@@ -42,7 +45,7 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 			instanciaLocal = (RepositorioGestor) o;
 		} catch (Exception e) {
 			
-			instanciaLocal = new RepositorioGestor();
+			instanciaLocal = new RepositorioGestor(50);
 			
 		} finally {
 
@@ -64,7 +67,7 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 			return;
 		}
 
-		File dir = new File("ARQUIVOS\\CADASTRO GESTORES");
+		File dir = new File("DADOS\\CADASTRO GESTORES");
 		dir.mkdirs();
 		File out = new File(dir,"cadastrogestores.bin");
         
@@ -96,15 +99,15 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 	}
 	
 	/**
-	 * Faz uma busca para conferir se o Gestor � cadastrado ou n�o cadastrado
+	 * Faz uma busca para conferir se o Gestor é cadastrado ou não cadastrado
 	 * 
 	 * @param gestor  
-	 * @return verdadeiro se j� existe ou falso se � inexistente
+	 * @return verdadeiro se já existe ou falso se é inexistente
 	 */
 	public boolean existe(Gestor gestor){
 		boolean achou = false;
-		for(int i = 0; i<this.listaDeGestores.size();i++){
-			if(this.listaDeGestores.get(i).getCpf().equals(gestor.getCpf())){
+		for(int i = 0; i <= (this.listaDeGestores.length-1);i++){
+			if(this.listaDeGestores[i].getCpf().equals(gestor.getCpf())){
 				achou = true;
 			}
 		}
@@ -120,19 +123,72 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 	 */
 	public void inserirGestor(Gestor gestor) throws IOException, CadastroGestorExistenteException{
 		if(!this.existe(gestor)){
-			this.listaDeGestores.add(gestor);
+			this.listaDeGestores[this.proxima] = gestor ;
+			this.proxima++;
 			salvarArquivo();
 		}else{
 			throw new CadastroGestorExistenteException();
 		}
 	}
 	
-	public ArrayList<Gestor	> listarGestores(){
+	public Gestor[] listarGestores(){
 		return this.listaDeGestores;
 	}
 	
-	
+	private void duplicaArrayGestor() {
 
+		if (this.listaDeGestores != null && this.listaDeGestores.length > 0) {
+		    Gestor[] arrayDuplicado = new Gestor[this.listaDeGestores.length * 2];
+			for (int i = 0; i < this.listaDeGestores.length; i++) {
+				arrayDuplicado[i] = this.listaDeGestores[i];
+
+			}
+			this.listaDeGestores = arrayDuplicado;
+		}
+	}
+	/**
+	 *	Procura no Vetor/Array de Lista de Gestores o índice de um gestor específico
+	 *	dentro do if, faz a comparação se o nome do gestor que foi dado é igual ao do nome na listaDeGestores[i]
+	 *	ou seu CPF é igual ao do listaDeGestores[] 
+	 * @param gestor
+	 * @return
+	 */
+	private int procurarIndice(Gestor gestor){
+		int i = 0;
+		boolean achou = false;
+
+		while ((!achou) && (i < this.proxima)) {
+			if (gestor.equals(this.listaDeGestores[i].getNome()) || gestor.equals(this.listaDeGestores[i].getCpf())) {
+				achou = true;
+			} else {
+				i = i + 1;
+			}
+		}
+		return i;
+	}
+	
+	public Gestor procurar(Gestor gestor)throws ProcuraGestorInexistenteException {
+		int i = this.procurarIndice(gestor);
+		Gestor resultado = null;
+		if (i != this.proxima)
+			resultado = this.listaDeGestores[i];
+		else
+			throw new ProcuraGestorInexistenteException();
+
+		return resultado;
+	} 
+
+	public void remover(Gestor gestor) throws IOException, ProcuraGestorInexistenteException {
+		int i = this.procurarIndice(gestor);
+		if (i != this.proxima) {
+			this.listaDeGestores[i] = this.listaDeGestores[this.proxima - 1];
+			this.listaDeGestores[this.proxima - 1] = null;
+			this.proxima = this.proxima - 1;
+		}else throw new ProcuraGestorInexistenteException(); 
+
+		salvarArquivo();
+
+	}
 	@Override
 	public boolean equals(Gestor a, Gestor B) {
 		// TODO Auto-generated method stub
