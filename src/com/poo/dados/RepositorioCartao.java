@@ -96,11 +96,11 @@ public class RepositorioCartao implements IRepositorioCartao, Serializable{
 		}
 	}
 	
-	/**
-	 * Verifica se um aluno é realmente da faculdade ou não
+/**
+	 * Verifica se cartao existe ou não
 	 * 
 	 * @param cartao 
-	 * @return Verdadeiro se for estudante e falso se não for estudante
+	 * @return true se existir um cartao e false caso não exista
 	 */
 	public boolean existe(Cartao cartao){
 		boolean achou = false;
@@ -113,11 +113,11 @@ public class RepositorioCartao implements IRepositorioCartao, Serializable{
 	}
 	
 	/**
-	 * Adiciona um novo aluno a lista de alunos
+	 * Adiciona um novo cartão a lista de cartões
 	 * 
-	 * @param aluno
+	 * @param cartao
 	 * @throws IOException
-	 * @throws CadastroAlunoExistenteException
+	 * @throws CadastroCartaoExistenteException
 	 */
 	public void inserirCartao(Cartao cartao) throws IOException, CadastroCartaoExistenteException{
 		if(!this.existe(cartao)){
@@ -132,7 +132,9 @@ public class RepositorioCartao implements IRepositorioCartao, Serializable{
 	public Cartao[] listarCartoes(){
 		return this.listaDeCartao;
 	}
-	
+	/**
+	 * Duplica o array caso seja necessário mais espaço para o vetor
+	 */
 	private void duplicaArrayCartao() {
 
 		if (this.listaDeCartao != null && this.listaDeCartao.length > 0) {
