@@ -127,7 +127,7 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 			this.proxima++;
 			salvarArquivo();
 		}else{
-			throw new CadastroAlunoExistenteException();
+			throw new CadastroAlunoExistenteException(aluno.getNome());
 		}
 		if(this.proxima == this.listaDeAlunos.length){
 			this.duplicaArrayAluno();

@@ -3,6 +3,7 @@ package com.poo.negocios.beans;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
+import com.poo.excecoes.AnoIngressoInvalidoException;
 import com.poo.excecoes.CpfInvalidoException;
 import com.poo.excecoes.StatusInvalidoException;
 import com.poo.excecoes.CursoInvalidoException;
