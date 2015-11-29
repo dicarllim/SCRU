@@ -127,6 +127,10 @@ public class RepositorioCartao implements IRepositorioCartao, Serializable{
 		}else{
 			throw new CadastroCartaoExistenteException();
 		}
+		if(this.proxima == this.listaDeCartao.length){
+			this.duplicaArrayCartao();
+		}
+		salvarArquivo();
 	}
 	
 	public Cartao[] listarCartoes(){
