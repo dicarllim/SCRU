@@ -129,6 +129,10 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 		}else{
 			throw new CadastroGestorExistenteException();
 		}
+		if(this.proxima == this.listaDeGestores.length){
+			this.duplicaArrayGestor();
+		}
+		salvarArquivo();
 	}
 	
 	public Gestor[] listarGestores(){
