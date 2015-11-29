@@ -63,7 +63,7 @@ public class TelaAluno extends JFrame {
 		JLabel lblAtm = new JLabel("ATM® 2015");
 		lblAtm.setForeground(new Color(211, 211, 211));
 		lblAtm.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		lblAtm.setBounds(431, 301, 75, 16);
+		lblAtm.setBounds(411, 267, 75, 51);
 		contentPane.add(lblAtm);
 	}
 }

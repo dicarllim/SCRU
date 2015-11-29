@@ -49,46 +49,46 @@ public class TelaRecarga extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblRecarregarCarto = new JLabel("RECARREGAR CARTÃO");
-		lblRecarregarCarto.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblRecarregarCarto.setBounds(140, 60, 240, 25);
+		lblRecarregarCarto.setFont(new Font("Georgia", Font.BOLD, 20));
+		lblRecarregarCarto.setBounds(140, 60, 255, 25);
 		contentPane.add(lblRecarregarCarto);
 		
 		textField = new JTextField();
-		textField.setBounds(220, 108, 192, 36);
+		textField.setBounds(219, 114, 192, 25);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNmeroCarto = new JLabel("Número do cartão:");
-		lblNmeroCarto.setBounds(99, 118, 121, 16);
+		lblNmeroCarto.setBounds(125, 118, 121, 16);
 		contentPane.add(lblNmeroCarto);
 		
 		JLabel lblValor = new JLabel("Valor:");
-		lblValor.setBounds(176, 152, 61, 16);
+		lblValor.setBounds(184, 147, 61, 16);
 		contentPane.add(lblValor);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(220, 142, 134, 36);
+		textField_1.setBounds(220, 142, 134, 26);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel lblSenhaAdm = new JLabel("Senha ADM:");
-		lblSenhaAdm.setBounds(142, 184, 78, 16);
+		lblSenhaAdm.setBounds(153, 179, 78, 16);
 		contentPane.add(lblSenhaAdm);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(220, 181, 134, 25);
+		passwordField.setBounds(220, 175, 134, 25);
 		contentPane.add(passwordField);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(99, 243, 117, 29);
+		btnCancelar.setBounds(73, 243, 117, 29);
 		contentPane.add(btnCancelar);
 		
 		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setBounds(208, 243, 117, 29);
+		btnLimpar.setBounds(199, 243, 117, 29);
 		contentPane.add(btnLimpar);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setBounds(318, 243, 117, 29);
+		btnConfirmar.setBounds(326, 243, 117, 29);
 		contentPane.add(btnConfirmar);
 	}
 }

@@ -46,16 +46,16 @@ public class TelaDesativarAluno extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblDesativarAluno = new JLabel("DESATIVAR ALUNO");
-		lblDesativarAluno.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblDesativarAluno.setBounds(125, 60, 198, 33);
+		lblDesativarAluno.setFont(new Font("Georgia", Font.BOLD, 20));
+		lblDesativarAluno.setBounds(125, 60, 212, 33);
 		contentPane.add(lblDesativarAluno);
 		
 		JLabel lblDigiteOCpf = new JLabel("Digite o CPF do Aluno:");
-		lblDigiteOCpf.setBounds(65, 129, 142, 16);
+		lblDigiteOCpf.setBounds(88, 129, 142, 16);
 		contentPane.add(lblDigiteOCpf);
 		
 		textField = new JTextField();
-		textField.setBounds(219, 123, 170, 28);
+		textField.setBounds(200, 123, 170, 28);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -64,7 +64,7 @@ public class TelaDesativarAluno extends JFrame {
 		contentPane.add(btnCancelar);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setBounds(231, 196, 117, 29);
+		btnConfirmar.setBounds(235, 196, 117, 29);
 		contentPane.add(btnConfirmar);
 	}
 

@@ -48,8 +48,8 @@ public class TelaCadastroGestor extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblCadastrarNovoGestor = new JLabel("CADASTRAR NOVO GESTOR");
-		lblCadastrarNovoGestor.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblCadastrarNovoGestor.setBounds(110, 41, 285, 25);
+		lblCadastrarNovoGestor.setFont(new Font("Georgia", Font.BOLD, 20));
+		lblCadastrarNovoGestor.setBounds(111, 64, 298, 25);
 		contentPane.add(lblCadastrarNovoGestor);
 		
 		JLabel lblNome = new JLabel("Nome:");
@@ -57,7 +57,7 @@ public class TelaCadastroGestor extends JFrame {
 		contentPane.add(lblNome);
 		
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(120, 157, 61, 16);
+		lblCpf.setBounds(120, 142, 61, 32);
 		contentPane.add(lblCpf);
 		
 		JLabel lblSenha = new JLabel("Senha:");
@@ -80,15 +80,15 @@ public class TelaCadastroGestor extends JFrame {
 		textField_2.setColumns(10);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(80, 234, 117, 29);
+		btnCancelar.setBounds(64, 234, 117, 29);
 		contentPane.add(btnCancelar);
 		
 		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setBounds(196, 234, 117, 29);
+		btnLimpar.setBounds(191, 234, 117, 29);
 		contentPane.add(btnLimpar);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setBounds(313, 234, 117, 29);
+		btnConfirmar.setBounds(318, 234, 117, 29);
 		contentPane.add(btnConfirmar);
 	}
 

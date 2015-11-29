@@ -54,7 +54,7 @@ public class TelaPrincipal extends JFrame {
 		
 		JButton btnAlunoUfrpe = new JButton("ALUNO UFRPE");
 		btnAlunoUfrpe.setForeground(new Color(244, 164, 96));
-		btnAlunoUfrpe.setBackground(new Color(255, 165, 0));
+		btnAlunoUfrpe.setBackground(Color.WHITE);
 		btnAlunoUfrpe.setBounds(101, 159, 155, 72);
 		contentPane.add(btnAlunoUfrpe);
 		
@@ -72,7 +72,7 @@ public class TelaPrincipal extends JFrame {
 		JLabel lblAtm = new JLabel("ATM® 2015");
 		lblAtm.setForeground(new Color(211, 211, 211));
 		lblAtm.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		lblAtm.setBounds(437, 304, 58, 13);
+		lblAtm.setBounds(414, 274, 58, 32);
 		contentPane.add(lblAtm);
 	}
 }

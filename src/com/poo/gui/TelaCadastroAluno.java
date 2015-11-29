@@ -54,12 +54,12 @@ public class TelaCadastroAluno extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblCadastrarNovoAluno = new JLabel("CADASTRAR NOVO ALUNO");
-		lblCadastrarNovoAluno.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblCadastrarNovoAluno.setBounds(120, 47, 285, 16);
+		lblCadastrarNovoAluno.setFont(new Font("Georgia", Font.BOLD, 20));
+		lblCadastrarNovoAluno.setBounds(107, 48, 296, 16);
 		contentPane.add(lblCadastrarNovoAluno);
 		
 		textField = new JTextField();
-		textField.setBounds(85, 86, 372, 28);
+		textField.setBounds(85, 86, 359, 28);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -82,13 +82,13 @@ public class TelaCadastroAluno extends JFrame {
 		contentPane.add(lblAnoIngresso);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(354, 120, 103, 28);
+		textField_2.setBounds(341, 120, 103, 28);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(85, 154, 372, 28);
+		textField_3.setBounds(85, 154, 359, 28);
 		contentPane.add(textField_3);
 		
 		JLabel lblCurso = new JLabel("Curso:");
@@ -100,13 +100,15 @@ public class TelaCadastroAluno extends JFrame {
 		contentPane.add(lblResidente);
 		
 		JRadioButton rdbtnSim = new JRadioButton("Sim");
+		rdbtnSim.setBackground(new Color(143, 188, 143));
 		rdbtnSim.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		rdbtnSim.setBounds(105, 190, 148, 23);
+		rdbtnSim.setBounds(95, 189, 47, 23);
 		contentPane.add(rdbtnSim);
 		
 		JRadioButton rdbtnNo = new JRadioButton("Não");
+		rdbtnNo.setBackground(new Color(143, 188, 143));
 		rdbtnNo.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		rdbtnNo.setBounds(158, 190, 141, 23);
+		rdbtnNo.setBounds(158, 190, 61, 23);
 		contentPane.add(rdbtnNo);
 		
 		JButton btnCancelar = new JButton("Cancelar");

@@ -48,7 +48,7 @@ public class TelaSaldo extends JFrame {
 		JLabel lblBoaRefeio = new JLabel("BOA REFEIÇÃO!");
 		lblBoaRefeio.setForeground(new Color(105, 105, 105));
 		lblBoaRefeio.setFont(new Font("Consolas", Font.BOLD, 35));
-		lblBoaRefeio.setBounds(132, 96, 247, 66);
+		lblBoaRefeio.setBounds(132, 68, 247, 66);
 		contentPane.add(lblBoaRefeio);
 		
 		JLabel lblSaldo = new JLabel("SALDO DISPONÍVEL:");
