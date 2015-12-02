@@ -7,10 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
-import com.poo.excecoes.AlunoInexistenteException;
-import com.poo.excecoes.CadastroAlunoExistenteException;
-import com.poo.excecoes.ProcuraAlunoInexistenteException;
+import com.poo.excecoes.NegocioException;
 import com.poo.negocios.beans.Aluno;
 
 
@@ -121,13 +118,13 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 	 * @throws IOException
 	 * @throws CadastroAlunoExistenteException
 	 */
-	public void inserirAluno(Aluno aluno) throws IOException, CadastroAlunoExistenteException{
+	public void inserirAluno(Aluno aluno) throws IOException, NegocioException{
 		if(!this.existe(aluno)){
 			this.listaDeAlunos[this.proxima] = aluno;
 			this.proxima++;
 			salvarArquivo();
 		}else{
-			throw new CadastroAlunoExistenteException(aluno.getNome());
+			throw new NegocioException("INSERIR - " + aluno.getNome() + " JA EXISTE!");
 		}
 		if(this.proxima == this.listaDeAlunos.length){
 			this.duplicaArrayAluno();
@@ -200,13 +197,13 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 	 * @return dados do aluno no índice i ou null
 	 * @throws ProcuraAlunoInexistenteException
 	 */
-	public Aluno procurar(Aluno aluno)throws ProcuraAlunoInexistenteException {
+	public Aluno procurar(Aluno aluno) throws NegocioException {
 		int i = this.procurarIndice(aluno);
 		Aluno resultado = null;
 		if (i != this.proxima)
 			resultado = this.listaDeAlunos[i];
 		else
-			throw new ProcuraAlunoInexistenteException();
+			throw new NegocioException("PROCURAR - ALUNO INEXISTENTE!");
 
 		return resultado;
 	} 
@@ -217,13 +214,13 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 	 * @throws IOException
 	 * @throws ProcuraAlunoInexistenteException
 	 */
-	public void remover(Aluno aluno) throws IOException, ProcuraAlunoInexistenteException {
+	public void remover(Aluno aluno) throws IOException, NegocioException {
 		int i = this.procurarIndice(aluno);
 		if (i != this.proxima) {
 			this.listaDeAlunos[i] = this.listaDeAlunos[this.proxima - 1];
 			this.listaDeAlunos[this.proxima - 1] = null;
 			this.proxima = this.proxima - 1;
-		}else throw new ProcuraAlunoInexistenteException(); 
+		}else throw new NegocioException("REMOVER - ALUNO INEXISTENTE!"); 
 
 		salvarArquivo();
 

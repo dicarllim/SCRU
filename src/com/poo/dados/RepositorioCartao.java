@@ -8,8 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import com.poo.excecoes.CadastroCartaoExistenteException;
-import com.poo.negocios.beans.Cartao;
+import com.poo.excecoes.NegocioException;
 import com.poo.negocios.beans.Cartao;
 
 public class RepositorioCartao implements IRepositorioCartao, Serializable{
@@ -105,7 +104,7 @@ public class RepositorioCartao implements IRepositorioCartao, Serializable{
 	public boolean existe(Cartao cartao){
 		boolean achou = false;
 		for(int i = 0; i <= (this.listaDeCartao.length-1); i++){
-			if(this.listaDeCartao[i].getNumero().equals(cartao.getNumero())){
+			if(this.listaDeCartao[i].getNumeroCartao() == cartao.getNumeroCartao()){
 				achou = true;
 			}
 		}
@@ -119,13 +118,13 @@ public class RepositorioCartao implements IRepositorioCartao, Serializable{
 	 * @throws IOException
 	 * @throws CadastroCartaoExistenteException
 	 */
-	public void inserirCartao(Cartao cartao) throws IOException, CadastroCartaoExistenteException{
+	public void inserirCartao(Cartao cartao) throws IOException, NegocioException{
 		if(!this.existe(cartao)){
 			this.listaDeCartao[this.proxima] = cartao;
 			this.proxima++;
 			salvarArquivo();
 		}else{
-			throw new CadastroCartaoExistenteException();
+			throw new NegocioException("INSERIR - " + cartao.getNumeroCartao() + "JA EXISTE");
 		}
 		if(this.proxima == this.listaDeCartao.length){
 			this.duplicaArrayCartao();

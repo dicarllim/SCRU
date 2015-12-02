@@ -9,9 +9,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 
-import com.poo.excecoes.CadastroGestorExistenteException;
-import com.poo.excecoes.ProcuraAlunoInexistenteException;
-import com.poo.excecoes.ProcuraGestorInexistenteException;
+import com.poo.excecoes.NegocioException;
+import com.poo.excecoes.NegocioException;
 import com.poo.negocios.beans.Gestor;
 
 
@@ -121,13 +120,13 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 	 * @throws IOException
 	 * @throws CadastroGestorExistenteException
 	 */
-	public void inserirGestor(Gestor gestor) throws IOException, CadastroGestorExistenteException{
+	public void inserirGestor(Gestor gestor) throws IOException, NegocioException{
 		if(!this.existe(gestor)){
 			this.listaDeGestores[this.proxima] = gestor ;
 			this.proxima++;
 			salvarArquivo();
 		}else{
-			throw new CadastroGestorExistenteException();
+			throw new NegocioException("INSERIR - " + gestor.getNome() + " JA EXISTE!");
 		}
 		if(this.proxima == this.listaDeGestores.length){
 			this.duplicaArrayGestor();
@@ -171,24 +170,24 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 		return i;
 	}
 	
-	public Gestor procurar(Gestor gestor)throws ProcuraGestorInexistenteException {
+	public Gestor procurar(Gestor gestor) throws NegocioException {
 		int i = this.procurarIndice(gestor);
 		Gestor resultado = null;
 		if (i != this.proxima)
 			resultado = this.listaDeGestores[i];
 		else
-			throw new ProcuraGestorInexistenteException();
+			throw new NegocioException("PROCURAR - GESTOR INEXISTENTE!");
 
 		return resultado;
 	} 
 
-	public void remover(Gestor gestor) throws IOException, ProcuraGestorInexistenteException {
+	public void remover(Gestor gestor) throws IOException, NegocioException {
 		int i = this.procurarIndice(gestor);
 		if (i != this.proxima) {
 			this.listaDeGestores[i] = this.listaDeGestores[this.proxima - 1];
 			this.listaDeGestores[this.proxima - 1] = null;
 			this.proxima = this.proxima - 1;
-		}else throw new ProcuraGestorInexistenteException(); 
+		}else throw new NegocioException("REMOVER - GESTOR INEXISTENTE!"); 
 
 		salvarArquivo();
 
