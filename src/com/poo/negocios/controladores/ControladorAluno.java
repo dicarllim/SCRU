@@ -1,6 +1,7 @@
 package com.poo.negocios.controladores;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import com.poo.dados.IRepositorioAluno;
 import com.poo.dados.RepositorioAluno;
@@ -15,21 +16,18 @@ public class ControladorAluno {
 	private IRepositorioAluno repositorio;
 	
 	public ControladorAluno(){
-		try{
 			this.repositorio = RepositorioAluno.getInstance();
-		}catch(IOException e){
-			e.printStackTrace();
-		}
 	}
 	
-	public void cadastrar(Aluno aluno)throws IOException, NegocioException{
+	public void cadastrar(Aluno aluno)throws NegocioException{
 		if(this.repositorio.existe(aluno)){
 			//fazer as outras verifica��es aqui, inclusive dos atributos da classe pessoa
 			if(aluno.getNome() != null){
 				if(Validacoes.validarCPF(aluno.getCpf())){
 					if(aluno.getCurso() != null){
 						if(aluno.getAnoIngresso() > 0){
-							aluno.setCodigo(Validacoes.gerarCodigo(aluno));
+							aluno.setCartao(this.gerarCartao(aluno));
+							this.repositorio.inserirAluno(aluno);
 						}else{
 							throw new NegocioException("CADASTRAR - ANO DE INGRESSO INVALIDO!");
 						}
@@ -44,12 +42,12 @@ public class ControladorAluno {
 			}
 			this.repositorio.inserirAluno(aluno);
 		}else{
-			throw new NegocioException(aluno.getNome() + "JA ESTA CADASTRADO!");
+			throw new NegocioException(aluno.getNome() + " JA ESTA CADASTRADO!");
 		}
 		
 	}
 	
-	public Aluno[] listarAlunos() throws IOException{
+	public Aluno[] listarAlunos(){
 		return this.repositorio.listarAlunos();
 	}
 	
@@ -60,7 +58,7 @@ public class ControladorAluno {
 		while(resultado == false){
 			codigo = aluno.hashCode();
 			for(int i = 0; i < this.repositorio.listarAlunos().length; i++){
-				if(this.repositorio.listarAlunos()[i].getCodigo() == codigo){
+				if(this.repositorio.listarAlunos()[i].getCartao().getNumeroCartao() == codigo){
 				   recorrencia +=1;	
 				}
 			}
@@ -74,7 +72,7 @@ public class ControladorAluno {
 	}
 	
 	
-	public void remover(Aluno aluno) throws IOException, NegocioException{
+	public void remover(Aluno aluno) throws NegocioException{
 		this.repositorio.remover(aluno);
 	}
 	
@@ -101,4 +99,12 @@ public class ControladorAluno {
 		}
 	}
 		
+	private Cartao gerarCartao(Aluno aluno){
+		String data = String.valueOf(Calendar.getInstance().getTime().getDate());
+		data+="/" + Calendar.getInstance().getTime().getMonth();
+		data+="/" + Calendar.getInstance().getTime().getYear();
+		Cartao cartao = new Cartao(data, 0.0, this.validarCodigo(aluno));
+		
+		return cartao;
+	}
 }

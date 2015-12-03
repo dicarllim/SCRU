@@ -22,17 +22,17 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 		this.proxima = 0;
 	}
 	
-	public static IRepositorioAluno getInstance() throws IOException {
+	public static IRepositorioAluno getInstance(){
 		if (instance == null) {
 			instance = abrirArquivo();
 		}
 		return instance;
 	}
 	
-	private static RepositorioAluno abrirArquivo() throws IOException {
+	private static RepositorioAluno abrirArquivo(){
 
 		RepositorioAluno instanciaLocal = null;
-		File in = new File("ARQUIVOS\\CADASTRO ALUNOS\\cadastroalunos.bin");
+		File in = new File("ARQUIVOS\\CADASTRO ALUNOS\\cadastroalunos.txt");
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
@@ -58,7 +58,7 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 
 	}
 	
-	public static void salvarArquivo() throws IOException {
+	public static void salvarArquivo(){
 
 		if (instance == null) {
 			return;
@@ -66,12 +66,15 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 
 		File dir = new File("ARQUIVOS\\CADASTRO ALUNOS");
 		dir.mkdirs();
-		File out = new File(dir,"cadastroalunos.bin");
+		File out = new File(dir,"cadastroalunos.txt");
         
 		if (!out.exists()){
-			
-			out.createNewFile();
-        }
+			try{
+				out.createNewFile();
+				}catch(IOException e){
+					/*Silent*/
+				}
+			}
 		
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
@@ -118,7 +121,7 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 	 * @throws IOException
 	 * @throws CadastroAlunoExistenteException
 	 */
-	public void inserirAluno(Aluno aluno) throws IOException, NegocioException{
+	public void inserirAluno(Aluno aluno) throws NegocioException{
 		if(!this.existe(aluno)){
 			this.listaDeAlunos[this.proxima] = aluno;
 			this.proxima++;
@@ -132,25 +135,6 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 		salvarArquivo();
 	}
 	
-	/*public void cadastra(Aluno a) throws IOException, CadastroAlunoExistenteException, CPFCadastradoExeception{
-		
-		if (a != null)
-		if (this.existe(a.getNome())) {
-			throw new CadastroAlunoExistenteException(a.getNome());
-
-		}else if(this.existe(a.getCpf())){
-			throw new CPFCadastradoExeception();
-		}else{
-			this.listaDeAlunos[proxima] = (Aluno) a;
-			this.proxima = this.proxima+1;
-		}
-	if (this.proxima == this.listaDeAlunos.length) {
-
-		this.duplicaArrayCliente();
-	}
-	salvarArquivo();
-
-	}*/
 	
 	public Aluno[] listarAlunos(){
 		return this.listaDeAlunos;
@@ -214,7 +198,7 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 	 * @throws IOException
 	 * @throws ProcuraAlunoInexistenteException
 	 */
-	public void remover(Aluno aluno) throws IOException, NegocioException {
+	public void remover(Aluno aluno) throws NegocioException {
 		int i = this.procurarIndice(aluno);
 		if (i != this.proxima) {
 			this.listaDeAlunos[i] = this.listaDeAlunos[this.proxima - 1];

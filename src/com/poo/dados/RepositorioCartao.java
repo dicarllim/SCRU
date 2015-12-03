@@ -22,17 +22,17 @@ public class RepositorioCartao implements IRepositorioCartao, Serializable{
 		this.proxima = 0;
 	}
 	
-	public static IRepositorioCartao getInstance() throws IOException {
+	public static IRepositorioCartao getInstance() {
 		if (instance == null) {
 			instance = abrirArquivo();
 		}
 		return instance;
 	}
 	
-	private static RepositorioCartao abrirArquivo() throws IOException {
+	private static RepositorioCartao abrirArquivo() {
 
 		RepositorioCartao instanciaLocal = null;
-		File in = new File("DADOS\\CADASTRO CARTAO\\cadastrocartao.bin");
+		File in = new File("DADOS\\CADASTRO CARTAO\\cadastrocartao.txt");
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
@@ -58,7 +58,7 @@ public class RepositorioCartao implements IRepositorioCartao, Serializable{
 
 	}
 	
-	public static void salvarArquivo() throws IOException {
+	public static void salvarArquivo(){
 
 		if (instance == null) {
 			return;
@@ -66,11 +66,14 @@ public class RepositorioCartao implements IRepositorioCartao, Serializable{
 
 		File dir = new File("DADOS\\CADASTRO CARTAO");
 		dir.mkdirs();
-		File out = new File(dir,"cadastrocartao.bin");
+		File out = new File(dir,"cadastrocartao.txt");
         
 		if (!out.exists()){
-			
-			out.createNewFile();
+			try{
+				out.createNewFile();				
+			}catch(IOException e){
+				/*Silent*/
+			}
         }
 		
 		FileOutputStream fos = null;
@@ -118,7 +121,7 @@ public class RepositorioCartao implements IRepositorioCartao, Serializable{
 	 * @throws IOException
 	 * @throws CadastroCartaoExistenteException
 	 */
-	public void inserirCartao(Cartao cartao) throws IOException, NegocioException{
+	public void inserirCartao(Cartao cartao) throws NegocioException{
 		if(!this.existe(cartao)){
 			this.listaDeCartao[this.proxima] = cartao;
 			this.proxima++;

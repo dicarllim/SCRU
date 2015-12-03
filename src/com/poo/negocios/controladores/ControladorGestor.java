@@ -14,19 +14,15 @@ public class ControladorGestor {
 	private IRepositorioGestor repositorio;
 	
 	public ControladorGestor(){
-		try{
 			this.repositorio = RepositorioGestor.getInstance();
-		}catch(IOException e){
-			e.printStackTrace();
-		}
 	}
 	
-	public void cadastrar(Gestor gestor) throws IOException, NegocioException{
+	public void cadastrar(Gestor gestor) throws NegocioException{
 		if(this.repositorio.existe(gestor)){
 			if(gestor.getNome() != null){
 				if(Validacoes.validarCPF(gestor.getCpf())){
 					if(gestor.getSenha() != null){
-						
+						this.repositorio.inserirGestor(gestor);
 					}else{
 						throw new NegocioException("SENHA INVALIDA!");
 					}
@@ -42,7 +38,7 @@ public class ControladorGestor {
 		}
 	}
 	
-	public Gestor[] listarGestores() throws IOException{
+	public Gestor[] listarGestores() {
 		return this.repositorio.listarGestores();
 	}
 

@@ -48,13 +48,19 @@ public class TelaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRestauranteUniversitrio = new JLabel("RESTAURANTE UNIVERSITÁRIO");
+		JLabel lblRestauranteUniversitrio = new JLabel("RESTAURANTE UNIVERSITï¿½RIO");
 		lblRestauranteUniversitrio.setForeground(new Color(244, 164, 96));
 		lblRestauranteUniversitrio.setFont(new Font("Georgia", Font.PLAIN, 25));
 		lblRestauranteUniversitrio.setBounds(64, 57, 411, 56);
 		contentPane.add(lblRestauranteUniversitrio);
 		
 		JButton btnAlunoUfrpe = new JButton("ALUNO UFRPE");
+		btnAlunoUfrpe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaNumeroCartao telaNumeroCartao =  new TelaNumeroCartao();
+				telaNumeroCartao.setVisible(true);
+			}
+		});
 		btnAlunoUfrpe.setForeground(new Color(244, 164, 96));
 		btnAlunoUfrpe.setBackground(Color.WHITE);
 		btnAlunoUfrpe.setBounds(101, 159, 155, 72);
@@ -64,8 +70,11 @@ public class TelaPrincipal extends JFrame {
 		btnAdministrador.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				TelaLoginAdm telaLoginAdm = new TelaLoginAdm();
-				telaLoginAdm.setVisible(true);
+				setVisible(false);
+				TelaAdm telaAdm = new TelaAdm();
+				telaAdm.setVisible(true);
+				//TelaLoginAdm telaLoginAdm = new TelaLoginAdm();
+				//telaLoginAdm.setVisible(true);
 			}
 		});
 		btnAdministrador.setForeground(new Color(178, 34, 34));
@@ -77,11 +86,5 @@ public class TelaPrincipal extends JFrame {
 		lblUfrpe.setFont(new Font("Georgia", Font.PLAIN, 21));
 		lblUfrpe.setBounds(223, 103, 71, 16);
 		contentPane.add(lblUfrpe);
-		
-		JLabel lblAtm = new JLabel("ATM® 2015");
-		lblAtm.setForeground(new Color(211, 211, 211));
-		lblAtm.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		lblAtm.setBounds(414, 274, 58, 32);
-		contentPane.add(lblAtm);
 	}
 }

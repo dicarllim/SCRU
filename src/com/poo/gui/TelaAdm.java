@@ -85,7 +85,7 @@ public class TelaAdm extends JFrame {
 		lblPortalDoAdministrador.setBounds(110, 60, 289, 16);
 		contentPane.add(lblPortalDoAdministrador);
 		
-		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSITÁRIO UFRPE");
+		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSITï¿½RIO UFRPE");
 		lblRestauranteUniversitrioUfrpe.setBackground(new Color(220, 220, 220));
 		lblRestauranteUniversitrioUfrpe.setForeground(new Color(255, 255, 255));
 		lblRestauranteUniversitrioUfrpe.setFont(new Font("Lucida Grande", Font.PLAIN, 11));

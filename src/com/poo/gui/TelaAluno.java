@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaAluno extends JFrame {
 
@@ -29,7 +31,7 @@ public class TelaAluno extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblSelecioneAOpo = new JLabel("SELECIONE A OPÇÃO DESEJADA:");
+		JLabel lblSelecioneAOpo = new JLabel("SELECIONE A OPï¿½ï¿½O DESEJADA:");
 		lblSelecioneAOpo.setBackground(new Color(165, 42, 42));
 		lblSelecioneAOpo.setForeground(new Color(165, 42, 42));
 		lblSelecioneAOpo.setFont(new Font("Consolas", Font.BOLD, 18));
@@ -37,11 +39,25 @@ public class TelaAluno extends JFrame {
 		contentPane.add(lblSelecioneAOpo);
 		
 		JButton btnJantarr = new JButton("JANTAR (R$1,50)");
+		btnJantarr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TelaSaldo telaSaldo = new TelaSaldo();
+				telaSaldo.setVisible(true);
+			}
+		});
 		btnJantarr.setForeground(new Color(112, 128, 144));
 		btnJantarr.setBounds(96, 185, 335, 58);
 		contentPane.add(btnJantarr);
 		
-		JButton btnAlmoor = new JButton("ALMOÇO (R$2,00)");
+		JButton btnAlmoor = new JButton("ALMOï¿½O (R$2,00)");
+		btnAlmoor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TelaSaldo telaSaldo = new TelaSaldo();
+				telaSaldo.setVisible(true);
+			}
+		});
 		btnAlmoor.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -52,11 +68,5 @@ public class TelaAluno extends JFrame {
 		btnAlmoor.setForeground(new Color(112, 128, 144));
 		btnAlmoor.setBounds(96, 121, 335, 58);
 		contentPane.add(btnAlmoor);
-		
-		JLabel lblAtm = new JLabel("ATM® 2015");
-		lblAtm.setForeground(new Color(211, 211, 211));
-		lblAtm.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		lblAtm.setBounds(411, 267, 75, 51);
-		contentPane.add(lblAtm);
 	}
 }

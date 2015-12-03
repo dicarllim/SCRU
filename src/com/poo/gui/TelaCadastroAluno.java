@@ -16,6 +16,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JToggleButton;
 import javax.swing.JRadioButton;
 import java.awt.Font;
+import java.awt.Label;
+
 import javax.swing.JCheckBox;
 import java.awt.Checkbox;
 import javax.swing.JButton;
@@ -25,10 +27,10 @@ import java.awt.event.ActionEvent;
 public class TelaCadastroAluno extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField Nome;
+	private JTextField CPF;
+	private JTextField AnoIngresso;
+	private JTextField Curso;
 
 	/**
 	 * Create the frame.
@@ -47,20 +49,20 @@ public class TelaCadastroAluno extends JFrame {
 		lblCadastrarNovoAluno.setBounds(107, 48, 296, 16);
 		contentPane.add(lblCadastrarNovoAluno);
 		
-		textField = new JTextField();
-		textField.setBounds(85, 86, 359, 28);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		Nome = new JTextField();
+		Nome.setBounds(85, 86, 359, 28);
+		contentPane.add(Nome);
+		Nome.setColumns(10);
 		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setForeground(new Color(0, 0, 0));
 		lblNome.setBounds(36, 92, 61, 16);
 		contentPane.add(lblNome);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(85, 120, 168, 28);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		CPF = new JTextField();
+		CPF.setBounds(85, 120, 168, 28);
+		contentPane.add(CPF);
+		CPF.setColumns(10);
 		
 		JLabel lblCpf = new JLabel("CPF:");
 		lblCpf.setBounds(46, 126, 61, 16);
@@ -70,15 +72,15 @@ public class TelaCadastroAluno extends JFrame {
 		lblAnoIngresso.setBounds(264, 126, 92, 16);
 		contentPane.add(lblAnoIngresso);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(341, 120, 103, 28);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		AnoIngresso = new JTextField();
+		AnoIngresso.setBounds(341, 120, 103, 28);
+		contentPane.add(AnoIngresso);
+		AnoIngresso.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(85, 154, 359, 28);
-		contentPane.add(textField_3);
+		Curso = new JTextField();
+		Curso.setColumns(10);
+		Curso.setBounds(85, 154, 359, 28);
+		contentPane.add(Curso);
 		
 		JLabel lblCurso = new JLabel("Curso:");
 		lblCurso.setBounds(36, 160, 61, 16);
@@ -87,34 +89,54 @@ public class TelaCadastroAluno extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				setVisible(false);
+				TelaAdm telaAdm = new TelaAdm();
+				telaAdm.setVisible(true);
 			}
 		});
-		btnCancelar.setBounds(10, 238, 85, 29);
+		btnCancelar.setBounds(60, 255, 85, 29);
 		contentPane.add(btnCancelar);
 		
 		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setBounds(109, 238, 75, 29);
-		contentPane.add(btnLimpar);
-		
-		JButton btnGerarCdigo = new JButton("Gerar Código");
-		btnGerarCdigo.setBounds(194, 238, 109, 29);
-		contentPane.add(btnGerarCdigo);
-		
-		JButton btnGerarCarto = new JButton("Gerar Cartão");
-		btnGerarCarto.setBounds(313, 238, 104, 29);
-		contentPane.add(btnGerarCarto);
-		
-		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				float valor = Float.parseFloat(textField_2.getText());
-				Aluno aluno = new Aluno(0L, textField.getText(), textField_1.getText(), textField_3.getText() , valor);
-
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	
 			}
 		});
-		btnSalvar.setBounds(427, 238, 75, 29);
-		contentPane.add(btnSalvar);
+		btnLimpar.setBounds(157, 255, 75, 29);
+		contentPane.add(btnLimpar);
+		
+
+		JLabel label = new JLabel("");
+		label.setBounds(171, 210, 61, 16);
+		contentPane.add(label);
+		
+		JButton btnGerarCdigo = new JButton("Gerar Cï¿½digo");
+		btnGerarCdigo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object o = new Object();
+				label.setText(String.valueOf(o.hashCode())); //transforma o codigo do cartao que tem retorno inteiro para String 
+			}
+		});
+		btnGerarCdigo.setBounds(247, 255, 109, 29);
+		contentPane.add(btnGerarCdigo);
+		
+		JButton btnGerarCarto = new JButton("Gerar Cartï¿½o");
+		btnGerarCarto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setVisible(false);
+				TelaInfoCartao telaInfoCartao = new TelaInfoCartao();
+				telaInfoCartao.setVisible(true);
+			}
+		});
+		btnGerarCarto.setBounds(371, 255, 104, 29);
+		contentPane.add(btnGerarCarto);
+		
+		JLabel lblC = new JLabel("CÃ³digo do CartÃ£o:");
+		lblC.setBounds(36, 210, 123, 16);
+		contentPane.add(lblC);
+		
 	}
 }
 

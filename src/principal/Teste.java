@@ -1,25 +1,16 @@
 package principal;
 
-import java.io.IOException;
-
 import com.poo.dados.RepositorioAluno;
+import com.poo.excecoes.NegocioException;
 import com.poo.negocios.beans.Aluno;
 import com.poo.negocios.beans.Cartao;
+import com.poo.negocios.beans.Gestor;
 
 public class Teste {
 
-	//public static void main(String[] args) throws CpfInvalidoException, StatusInvalidoException, IOException, CadastroAlunoExistenteException {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws NegocioException{
+		Gestor gestor = new Gestor("Ariany Ferreira", "10561403481", "123456");
 	
-	//Cartao a1 = new Cartao("10/20/15", "01/11/11", 0, 1);
-	//Aluno a = new Aluno("Thiago", "09198875469", a1, 1);
-	//RepositorioAluno teste = new RepositorioAluno();
-	//teste.inserirAluno(a);
-	
-	//teste.listarAlunos();
-	
-	
-	
-	//}
+	}
 
 }

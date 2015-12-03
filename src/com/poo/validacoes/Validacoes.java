@@ -61,12 +61,5 @@ public abstract class Validacoes {
 			return (false);
 		}
 
-	}
-	
-	public static final long gerarCodigo(Aluno aluno){
-		return aluno.hashCode();
-	}
-
-	
-	
+	}	
 }

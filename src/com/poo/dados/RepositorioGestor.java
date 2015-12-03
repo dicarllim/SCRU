@@ -24,17 +24,17 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 		this.proxima = 0;
 	}
 	
-	public static IRepositorioGestor getInstance() throws IOException {
+	public static IRepositorioGestor getInstance() {
 		if (instance == null) {
 			instance = abrirArquivo();
 		}
 		return instance;
 	}
 	
-	private static RepositorioGestor abrirArquivo() throws IOException {
+	private static RepositorioGestor abrirArquivo(){
 
 		RepositorioGestor instanciaLocal = null;
-		File in = new File("DADOS\\CADASTRO GESTORES\\cadastrogestores.bin");
+		File in = new File("DADOS\\CADASTRO GESTORES\\cadastrogestores.txt");
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
@@ -60,7 +60,7 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 
 	}
 	
-	public static void salvarArquivo() throws IOException {
+	public static void salvarArquivo() {
 
 		if (instance == null) {
 			return;
@@ -68,11 +68,14 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 
 		File dir = new File("DADOS\\CADASTRO GESTORES");
 		dir.mkdirs();
-		File out = new File(dir,"cadastrogestores.bin");
+		File out = new File(dir,"cadastrogestores.txt");
         
 		if (!out.exists()){
-			
-			out.createNewFile();
+			try{
+				out.createNewFile();				
+			} catch (IOException e){
+				/*Silent*/
+			}
         }
 		
 		FileOutputStream fos = null;
@@ -120,7 +123,7 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 	 * @throws IOException
 	 * @throws CadastroGestorExistenteException
 	 */
-	public void inserirGestor(Gestor gestor) throws IOException, NegocioException{
+	public void inserirGestor(Gestor gestor) throws NegocioException{
 		if(!this.existe(gestor)){
 			this.listaDeGestores[this.proxima] = gestor ;
 			this.proxima++;
@@ -181,7 +184,7 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 		return resultado;
 	} 
 
-	public void remover(Gestor gestor) throws IOException, NegocioException {
+	public void remover(Gestor gestor) throws NegocioException {
 		int i = this.procurarIndice(gestor);
 		if (i != this.proxima) {
 			this.listaDeGestores[i] = this.listaDeGestores[this.proxima - 1];
