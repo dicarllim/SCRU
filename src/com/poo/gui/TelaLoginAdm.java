@@ -20,22 +20,6 @@ public class TelaLoginAdm extends JFrame {
 	private JPasswordField passwordField;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaLoginAdm frame = new TelaLoginAdm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public TelaLoginAdm() {
@@ -53,12 +37,12 @@ public class TelaLoginAdm extends JFrame {
 		lblAcessoAdministrador.setBounds(113, 93, 300, 30);
 		contentPane.add(lblAcessoAdministrador);
 		
-		JLabel lblLogin = new JLabel("login:");
+		JLabel lblLogin = new JLabel("Login:");
 		lblLogin.setForeground(new Color(128, 128, 128));
 		lblLogin.setBounds(154, 144, 61, 16);
 		contentPane.add(lblLogin);
 		
-		JLabel lblSenha = new JLabel("senha:");
+		JLabel lblSenha = new JLabel("Senha:");
 		lblSenha.setForeground(new Color(128, 128, 128));
 		lblSenha.setBounds(154, 181, 41, 16);
 		contentPane.add(lblSenha);

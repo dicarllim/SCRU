@@ -12,26 +12,12 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JToolBar;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaAdm extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaAdm frame = new TelaAdm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -46,21 +32,49 @@ public class TelaAdm extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnCadastrarAluno = new JButton("CADASTRAR ALUNO");
+		btnCadastrarAluno.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaCadastroAluno telaCadastroAluno = new TelaCadastroAluno();
+				telaCadastroAluno.setVisible(true);
+			}
+		});
 		btnCadastrarAluno.setForeground(new Color(105, 105, 105));
 		btnCadastrarAluno.setBounds(63, 100, 186, 83);
 		contentPane.add(btnCadastrarAluno);
 		
 		JButton btnCadastrarGestor = new JButton("CADASTRAR GESTOR");
+		btnCadastrarGestor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				TelaCadastroGestor telaCadastroGestor = new TelaCadastroGestor();
+				telaCadastroGestor.setVisible(true);
+			}
+		});
 		btnCadastrarGestor.setForeground(new Color(105, 105, 105));
 		btnCadastrarGestor.setBounds(261, 100, 186, 83);
 		contentPane.add(btnCadastrarGestor);
 		
 		JButton btnDesativarAluno = new JButton("DESATIVAR ALUNO");
+		btnDesativarAluno.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaDesativarAluno telaDesativarAluno = new TelaDesativarAluno();
+				telaDesativarAluno.setVisible(true);
+			}
+		});
 		btnDesativarAluno.setForeground(new Color(105, 105, 105));
 		btnDesativarAluno.setBounds(63, 195, 186, 83);
 		contentPane.add(btnDesativarAluno);
 		
 		JButton btnRecarregamento = new JButton("RECARREGAMENTO");
+		btnRecarregamento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaRecarga telaRecarga = new TelaRecarga();
+				telaRecarga.setVisible(true);
+			}
+		});
 		btnRecarregamento.setForeground(new Color(105, 105, 105));
 		btnRecarregamento.setBounds(261, 195, 186, 83);
 		contentPane.add(btnRecarregamento);

@@ -10,26 +10,12 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaAluno extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaAluno frame = new TelaAluno();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -56,6 +42,13 @@ public class TelaAluno extends JFrame {
 		contentPane.add(btnJantarr);
 		
 		JButton btnAlmoor = new JButton("ALMOÇO (R$2,00)");
+		btnAlmoor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaSaldo telaSaldo = new TelaSaldo();
+				telaSaldo.setVisible(true);
+			}
+		});
 		btnAlmoor.setForeground(new Color(112, 128, 144));
 		btnAlmoor.setBounds(96, 121, 335, 58);
 		contentPane.add(btnAlmoor);

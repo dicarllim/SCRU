@@ -13,6 +13,8 @@ import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaPrincipal extends JFrame {
 
@@ -59,6 +61,13 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(btnAlunoUfrpe);
 		
 		JButton btnAdministrador = new JButton("ADMINISTRADOR");
+		btnAdministrador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				TelaLoginAdm telaLoginAdm = new TelaLoginAdm();
+				telaLoginAdm.setVisible(true);
+			}
+		});
 		btnAdministrador.setForeground(new Color(178, 34, 34));
 		btnAdministrador.setBounds(258, 159, 160, 72);
 		contentPane.add(btnAdministrador);

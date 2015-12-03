@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.poo.negocios.beans.Aluno;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -16,6 +19,8 @@ import java.awt.Font;
 import javax.swing.JCheckBox;
 import java.awt.Checkbox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaCadastroAluno extends JFrame {
 
@@ -26,27 +31,11 @@ public class TelaCadastroAluno extends JFrame {
 	private JTextField textField_3;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastroAluno frame = new TelaCadastroAluno();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public TelaCadastroAluno() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 512, 345);
+		setBounds(100, 100, 528, 354);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(143, 188, 143));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,37 +84,37 @@ public class TelaCadastroAluno extends JFrame {
 		lblCurso.setBounds(36, 160, 61, 16);
 		contentPane.add(lblCurso);
 		
-		JLabel lblResidente = new JLabel("Residente: ");
-		lblResidente.setBounds(36, 194, 71, 16);
-		contentPane.add(lblResidente);
-		
-		JRadioButton rdbtnSim = new JRadioButton("Sim");
-		rdbtnSim.setBackground(new Color(143, 188, 143));
-		rdbtnSim.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		rdbtnSim.setBounds(95, 189, 47, 23);
-		contentPane.add(rdbtnSim);
-		
-		JRadioButton rdbtnNo = new JRadioButton("Não");
-		rdbtnNo.setBackground(new Color(143, 188, 143));
-		rdbtnNo.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		rdbtnNo.setBounds(158, 190, 61, 23);
-		contentPane.add(rdbtnNo);
-		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(23, 238, 117, 29);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnCancelar.setBounds(10, 238, 85, 29);
 		contentPane.add(btnCancelar);
 		
 		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setBounds(136, 238, 117, 29);
+		btnLimpar.setBounds(109, 238, 75, 29);
 		contentPane.add(btnLimpar);
 		
 		JButton btnGerarCdigo = new JButton("Gerar Código");
-		btnGerarCdigo.setBounds(251, 238, 117, 29);
+		btnGerarCdigo.setBounds(194, 238, 109, 29);
 		contentPane.add(btnGerarCdigo);
 		
 		JButton btnGerarCarto = new JButton("Gerar Cartão");
-		btnGerarCarto.setBounds(362, 238, 117, 29);
+		btnGerarCarto.setBounds(313, 238, 104, 29);
 		contentPane.add(btnGerarCarto);
+		
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				float valor = Float.parseFloat(textField_2.getText());
+				Aluno aluno = new Aluno(0L, textField.getText(), textField_1.getText(), textField_3.getText() , valor);
+
+			}
+		});
+		btnSalvar.setBounds(427, 238, 75, 29);
+		contentPane.add(btnSalvar);
 	}
 }
 
