@@ -18,7 +18,7 @@ public class Aluno extends Pessoa implements Serializable{
 		this.setCurso(curso);
 		this.setAnoIngresso(anoIngresso);
 		this.setNumeroDoCartao(numeroDoCartao);
-		this.setSaldo(0.0);
+		this.setSaldo(saldo);
 		this.setData(data);
 	}
 	

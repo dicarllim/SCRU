@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextPane;
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 
 public class TelaSaldo extends JFrame {
 
@@ -20,7 +22,7 @@ public class TelaSaldo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaSaldo() {
+	public TelaSaldo(double saldo) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
 		contentPane = new JPanel();
@@ -30,16 +32,16 @@ public class TelaSaldo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblBoaRefeio = new JLabel("BOA REFEIÇÃO!");
+		JLabel lblBoaRefeio = new JLabel("BOA REFEICAO!");
 		lblBoaRefeio.setForeground(new Color(105, 105, 105));
 		lblBoaRefeio.setFont(new Font("Consolas", Font.BOLD, 35));
 		lblBoaRefeio.setBounds(132, 68, 247, 66);
 		contentPane.add(lblBoaRefeio);
 		
-		JLabel lblSaldo = new JLabel("SALDO DISPONÍVEL:");
+		JLabel lblSaldo = new JLabel("SALDO DISPONIVEL:");
 		lblSaldo.setFont(new Font("Consolas", Font.BOLD, 25));
 		lblSaldo.setForeground(new Color(144, 238, 144));
-		lblSaldo.setBounds(39, 174, 291, 25);
+		lblSaldo.setBounds(70, 162, 238, 31);
 		contentPane.add(lblSaldo);
 		
 		JTextPane infoSaldo = new JTextPane();
@@ -47,8 +49,22 @@ public class TelaSaldo extends JFrame {
 		infoSaldo.setFont(new Font("Consolas", Font.PLAIN, 25));
 		infoSaldo.setEditable(false);
 		infoSaldo.setBackground(new Color(255, 255, 255));
-		infoSaldo.setBounds(282, 168, 143, 31);
+		infoSaldo.setBounds(320, 162, 48, 31);
 		contentPane.add(infoSaldo);
+		infoSaldo.setText(String.valueOf(saldo));
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				telaPrincipal.setVisible(true);
+			}
+		});
+		btnSair.setForeground(new Color(169, 169, 169));
+		btnSair.setBounds(194, 244, 138, 42);
+		contentPane.add(btnSair);
+		
 		
 		
 		}

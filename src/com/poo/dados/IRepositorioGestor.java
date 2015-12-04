@@ -11,6 +11,7 @@ public interface IRepositorioGestor {
 	public void inserirGestor(Gestor gestor) throws NegocioException;
 	public ArrayList<Gestor> listarGestores();
 	public void remover(Gestor gestor)throws NegocioException;
+	public void atualizar(Gestor gestor);
 	boolean equals(Gestor a, Gestor B);
 
 }

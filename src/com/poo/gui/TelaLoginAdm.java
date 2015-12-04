@@ -71,10 +71,10 @@ public class TelaLoginAdm extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 					String usuario = loginTexto.getText();
-					String senha = loginTexto.getText();
+					String senha = senhaTexto.getText();
 				
 					try {
-						if(Fachada.getInstance().loginGestor(usuario, senha) ){
+						if(Fachada.getInstance().loginGestor(usuario, senha)){
 							setVisible(false);
 							TelaAdm telaAdm = new TelaAdm();
 							telaAdm.setVisible(true);
@@ -88,7 +88,7 @@ public class TelaLoginAdm extends JFrame {
 		btnEnter.setBounds(276, 234, 117, 29);
 		contentPane.add(btnEnter);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		JButton btnCancelar = new JButton("Sair");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -100,7 +100,7 @@ public class TelaLoginAdm extends JFrame {
 		btnCancelar.setBounds(149, 234, 117, 29);
 		contentPane.add(btnCancelar);
 		
-		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSITÁRIO UFRPE");
+		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSITï¿½RIO UFRPE");
 		lblRestauranteUniversitrioUfrpe.setForeground(new Color(211, 211, 211));
 		lblRestauranteUniversitrioUfrpe.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		lblRestauranteUniversitrioUfrpe.setBounds(174, 72, 206, 16);

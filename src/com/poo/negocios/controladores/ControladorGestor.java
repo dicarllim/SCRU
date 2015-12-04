@@ -7,6 +7,7 @@ import com.poo.dados.IRepositorioGestor;
 import com.poo.dados.RepositorioGestor;
 import com.poo.excecoes.NegocioException;
 import com.poo.negocios.beans.Gestor;
+import com.poo.negocios.beans.Gestor;
 import com.poo.negocios.beans.Pessoa;
 import com.poo.validacoes.Validacoes;
 
@@ -20,7 +21,7 @@ public class ControladorGestor {
 	
 	public void cadastrar(Gestor gestor) throws NegocioException{
 		if(this.repositorio.existe(gestor) == false){
-			if(gestor.getNome() != null){
+			if(gestor.getNome().trim().length() > 2){
 				if(Validacoes.validarCPF(gestor.getCpf())){
 					if(gestor.getSenha() != null){
 						this.repositorio.inserirGestor(gestor);
@@ -33,7 +34,6 @@ public class ControladorGestor {
 			}else{
 				throw new NegocioException("NOME INVALIDO!");
 			}			
-			this.repositorio.inserirGestor(gestor);
 		}else{
 			throw new NegocioException(gestor.getNome() + "JA CADASTRADO!");
 		}
@@ -43,5 +43,12 @@ public class ControladorGestor {
 		return this.repositorio.listarGestores();
 	}
 
+	public void atualizarGestor(Gestor gestor) throws NegocioException{
+		if(this.repositorio.existe(gestor) == true){
+			this.repositorio.atualizar(gestor);
+		}else{
+			throw new NegocioException("GESTOR INEXISTENTE");
+		}
+	}
 
 }

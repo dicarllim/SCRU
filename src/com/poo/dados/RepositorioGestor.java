@@ -13,6 +13,7 @@ import com.poo.excecoes.NegocioException;
 import com.poo.excecoes.NegocioException;
 import com.poo.negocios.beans.Gestor;
 import com.poo.negocios.beans.Gestor;
+import com.poo.negocios.beans.Gestor;
 
 
 public class RepositorioGestor implements IRepositorioGestor, Serializable{
@@ -113,6 +114,20 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 		this.listaDeGestores.remove(gestor);
 		salvarArquivo();
 
+	}
+	private int procurarIndice(Gestor gestor){
+		int resultado =-1;
+		for(int i = 0; i < this.listaDeGestores.size(); i++){
+			if(listaDeGestores.get(i).getCpf().equals(gestor.getCpf())){
+				resultado = i;
+			}
+		}
+		return resultado;
+	}
+	
+	public void atualizar(Gestor gestor){
+		this.listaDeGestores.set(procurarIndice(gestor), gestor);
+		salvarArquivo();
 	}
 
 	@Override

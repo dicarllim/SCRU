@@ -12,6 +12,7 @@ public interface IRepositorioAluno {
 	public ArrayList<Aluno> listarAlunos();
 	public void remover(Aluno aluno) throws NegocioException;
 	boolean equals(Aluno a, Aluno B);
+	public void atualizar(Aluno aluno);
 	
 }
 

@@ -95,5 +95,19 @@ public class TelaAdm extends JFrame {
 		lblRestauranteUniversitrioUfrpe.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		lblRestauranteUniversitrioUfrpe.setBounds(155, 41, 199, 16);
 		contentPane.add(lblRestauranteUniversitrioUfrpe);
+		
+		JButton btnSair = new JButton("Logout");
+		btnSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				TelaLoginAdm telaLoginAdm = new TelaLoginAdm();
+				telaLoginAdm.setVisible(true);
+			}
+		});
+		btnSair.setForeground(new Color(169, 169, 169));
+		btnSair.setBackground(new Color(255, 255, 255));
+		btnSair.setBounds(6, 290, 69, 27);
+		contentPane.add(btnSair);
 	}
 }

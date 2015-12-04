@@ -7,9 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.poo.excecoes.NegocioException;
 import com.poo.negocios.Fachada;
+import com.poo.negocios.beans.Aluno;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.Color;
@@ -21,11 +25,12 @@ import java.awt.event.ActionEvent;
 public class TelaAluno extends JFrame {
 
 	private JPanel contentPane;
-
+	private Aluno aluno;
 	/**
 	 * Create the frame.
 	 */
-	public TelaAluno() {
+	public TelaAluno(Aluno aluno) {
+		this.aluno = aluno;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
 		contentPane = new JPanel();
@@ -44,9 +49,15 @@ public class TelaAluno extends JFrame {
 		JButton btnJantarr = new JButton("JANTAR (R$1,50)");
 		btnJantarr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				TelaSaldo telaSaldo = new TelaSaldo();
-				telaSaldo.setVisible(true);
+				try{
+					Fachada.getInstance().debitar(aluno.getNumeroDoCartao(), 1.5);
+					Fachada.getInstance().atualizarAluno(aluno);
+					TelaSaldo telaSaldo = new TelaSaldo(aluno.getSaldo());
+					setVisible(false);
+					telaSaldo.setVisible(true);
+				}catch(NegocioException e2){
+					JOptionPane.showMessageDialog(null, e2.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnJantarr.setForeground(new Color(112, 128, 144));
@@ -56,16 +67,23 @@ public class TelaAluno extends JFrame {
 		JButton btnAlmoor = new JButton("ALMOCO (R$2,00)");
 		btnAlmoor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				TelaSaldo telaSaldo = new TelaSaldo();
-				telaSaldo.setVisible(true);
+				try{
+					Fachada.getInstance().debitar(aluno.getNumeroDoCartao(), 2.0);
+					Fachada.getInstance().atualizarAluno(aluno);
+					TelaSaldo telaSaldo = new TelaSaldo(aluno.getSaldo());
+					setVisible(false);
+					telaSaldo.setVisible(true);
+				}catch(NegocioException e2){
+					JOptionPane.showMessageDialog(null, e2.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+				}
 				
 			}
 		});
 		btnAlmoor.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaSaldo telaSaldo = new TelaSaldo();
+				setVisible(false);
+				TelaSaldo telaSaldo = new TelaSaldo(aluno.getSaldo());
 				telaSaldo.setVisible(true);
 			}
 		});

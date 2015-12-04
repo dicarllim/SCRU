@@ -117,7 +117,21 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 		salvarArquivo();
 
 	}
-
+	private int procurarIndice(Aluno aluno){
+		int resultado =-1;
+		for(int i = 0; i < this.listaDeAlunos.size(); i++){
+			if(listaDeAlunos.get(i).getCpf().equals(aluno.getCpf())){
+				resultado = i;
+			}
+		}
+		return resultado;
+	}
+	
+	public void atualizar(Aluno aluno){
+		this.listaDeAlunos.set(procurarIndice(aluno), aluno);
+		salvarArquivo();
+	}
+	
 	@Override
 	public boolean equals(Aluno a, Aluno B) {
 		// TODO Auto-generated method stub

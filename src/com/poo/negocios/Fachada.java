@@ -30,10 +30,6 @@ public class Fachada {
 		this.aluno.cadastrar(aluno);
 	}
 	
-	public void remover(Aluno aluno) throws NegocioException{
-		this.aluno.remover(aluno);
-	}
-	
 	public void creditar(int codigo, double valor) throws NegocioException{
 		this.aluno.creditar(codigo, valor);
 	}
@@ -41,11 +37,6 @@ public class Fachada {
 	public void debitar(int codigo, double valor)throws NegocioException{
 		this.aluno.debitar(codigo, valor);
 	}
-	
-	public void selecionarRefeicao(int opcao, int codigo) throws NegocioException{
-		this.aluno.selecionarRefeicao(opcao, codigo);
-	}
-	
 
 	public void cadastrar(Gestor gestor) throws NegocioException{
 		this.gestor.cadastrar(gestor);
@@ -66,9 +57,32 @@ public class Fachada {
 			
 	}
 	
+	public Aluno loginAluno(int codigo) throws NegocioException{
+		Aluno aluno = null;
+		for(int i = 0; i <this.aluno.listarAlunos().size(); i++){
+			if(this.aluno.listarAlunos().get(i).getNumeroDoCartao()==codigo){
+				aluno = this.aluno.listarAlunos().get(i);
+			}
+		}
+		if(aluno != null){
+			return aluno;
+		}else{
+			throw new NegocioException("VOCE NAO ESTA CADASTRADO!");
+		}
+	}
+	
 	public boolean desativar(String cpf){
 		return this.aluno.desativar(cpf);
 	}
+	
+	public void atualizarGestor(Gestor gestor) throws NegocioException{
+		this.gestor.atualizarGestor(gestor);
+	}
+	
+	public void atualizarAluno(Aluno aluno) throws NegocioException{
+		this.aluno.atualizarAluno(aluno);
+	}
+	
 	
 }
 

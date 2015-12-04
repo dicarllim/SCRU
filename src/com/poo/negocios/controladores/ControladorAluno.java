@@ -22,11 +22,12 @@ public class ControladorAluno {
 	public void cadastrar(Aluno aluno)throws NegocioException{
 		if(this.repositorio.existe(aluno) == false){
 			//fazer as outras verificaï¿½ï¿½es aqui, inclusive dos atributos da classe pessoa
-			if(aluno.getNome() != null){
+			if(aluno.getNome().trim().length() > 2){
 				if(Validacoes.validarCPF(aluno.getCpf())){
-					if(aluno.getCurso() != null){
+					if(aluno.getCurso().trim().length() > 2 ){
 						if(aluno.getAnoIngresso() > 0){
 							if(aluno.getNumeroDoCartao() > 0){
+							//	aluno.setSaldo(0);
 								this.repositorio.inserirAluno(aluno);		
 							}else{
 								throw new NegocioException("CADASTRAR - CARTAO INVALIDO");
@@ -43,7 +44,6 @@ public class ControladorAluno {
 			}else{
 				throw new NegocioException("CADASTRAR - NOME INVALIDO!");
 			}
-			this.repositorio.inserirAluno(aluno);
 		}else{
 			throw new NegocioException(aluno.getNome() + " JA ESTA CADASTRADO!");
 		}
@@ -52,10 +52,6 @@ public class ControladorAluno {
 	
 	public ArrayList<Aluno> listarAlunos(){
 		return this.repositorio.listarAlunos();
-	}
-	
-	public void remover(Aluno aluno) throws NegocioException{
-		this.repositorio.remover(aluno);
 	}
 	
 	public void creditar(int codigo, double valor) throws NegocioException{
@@ -71,11 +67,11 @@ public class ControladorAluno {
 				aluno.setSaldo(aluno.getSaldo() + valor);
 			}
 			else{
-				throw new NegocioException("Código inválido");
+				throw new NegocioException("Codigo invalido");
 			}	
 		}
 		else
-			throw new NegocioException("Você não pode creditar 0 ou um valor negativo");
+			throw new NegocioException("Voce nao pode creditar 0 ou um valor negativo");
 	}
 	
 	public void debitar(int codigo, double valor) throws NegocioException{
@@ -88,14 +84,16 @@ public class ControladorAluno {
 				}
 			}
 			if(aluno != null){
-				aluno.setSaldo(aluno.getSaldo() - valor);
-			}
-			else{
-				throw new NegocioException("Código inválido");
+				if(aluno.getSaldo() > 2){
+					aluno.setSaldo(aluno.getSaldo() - valor);
+				}else{
+					throw new NegocioException("Voce nao possui saldo");
+				}
+			}else{
+				throw new NegocioException("Codigo invalido");
 			}	
-		}
-		else
-			throw new NegocioException("Você não pode debitar 0 ou um valor negativo");
+		}else
+			throw new NegocioException("Voce nao pode debitar 0 ou um valor negativo");
 		
 	}
 	
@@ -103,10 +101,10 @@ public class ControladorAluno {
 		boolean resultado = false;
 		for(int i = 0; i< this.listarAlunos().size();i++ ){
 			if(this.listarAlunos().get(i).getCpf().equals(cpf)){
-				try {
-					this.remover(this.listarAlunos().get(i));
+				try{	
+					this.repositorio.remover(this.repositorio.listarAlunos().get(i));
 					resultado = true;
-				} catch (NegocioException e) {
+				} catch(NegocioException e){
 					
 				}
 			}
@@ -115,20 +113,19 @@ public class ControladorAluno {
 		return resultado;
 	}
 	
-	public void selecionarRefeicao(int opcao, int codigo) throws NegocioException{
-		if(opcao == 1 ){
-			this.debitar(codigo, 2.0);
-		}else if(opcao == 2){
-			this.debitar(codigo, 1.5);
-		}else{
-			throw new NegocioException("REFEICAO INVALIDA!");
-		}
-	}
-	public String pegarData(){
+	public static String pegarData(){
 		String data = String.valueOf(Calendar.getInstance().getTime().getDate());
 		data+="/" + Calendar.getInstance().getTime().getMonth();
 		data+="/" + Calendar.getInstance().getTime().getYear();	
 		return data;
+	}
+	
+	public void atualizarAluno(Aluno aluno) throws NegocioException{
+		if(this.repositorio.existe(aluno) == true){
+			this.repositorio.atualizar(aluno);
+		}else{
+			throw new NegocioException("ALUNO INEXISTENTE");
+		}
 	}
 		
 }

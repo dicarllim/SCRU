@@ -6,8 +6,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.poo.excecoes.NegocioException;
+import com.poo.negocios.Fachada;
+
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -62,9 +68,14 @@ public class TelaNumeroCartao extends JFrame {
 		JButton btnEnter = new JButton("Entrar");
 		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				TelaAluno telaAluno = new TelaAluno();
-				telaAluno.setVisible(true);
+				try{
+					int numero = (int) Integer.parseInt(numeroCartao.getText());
+					TelaAluno telaAluno = new TelaAluno(Fachada.getInstance().loginAluno(numero));
+					setVisible(false);
+					telaAluno.setVisible(true);
+				} catch (NegocioException e2){
+					JOptionPane.showMessageDialog(null, e2.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnEnter.setForeground(new Color(119, 136, 153));
