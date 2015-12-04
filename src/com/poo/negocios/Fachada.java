@@ -12,8 +12,6 @@ public class Fachada {
 	private ControladorAluno aluno;
 	private ControladorGestor gestor;
 	
-	
-	
 	private Fachada(){
 		this.aluno = new ControladorAluno();
 		this.gestor = new ControladorGestor();
