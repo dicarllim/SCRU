@@ -129,15 +129,21 @@ public class TelaCadastroAluno extends JFrame {
 		btnGerarCarto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-				float ano = Float.parseFloat(AnoIngresso.getText());
-				Aluno aluno = new Aluno(Nome.getText(), CPF.getText(), Curso.getText(), ano, Integer.parseInt(label.getText()), 0.0, ControladorAluno.pegarData());
-				
-					Fachada.getInstance().cadastrar(aluno);
-					JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "Cadastro Aluno", JOptionPane.INFORMATION_MESSAGE);
-					limpar();
+					float ano = 0;
+					
+					String anoString = AnoIngresso.getText();
+					if(anoString.trim().equals("")){
+						JOptionPane.showMessageDialog(null, "Ano invalido", "", JOptionPane.ERROR_MESSAGE);
+					}else{
+						ano = Float.parseFloat(anoString);
+						Aluno aluno = new Aluno(Nome.getText(), CPF.getText(), Curso.getText(), ano, Integer.parseInt(label.getText()), 0.0, ControladorAluno.pegarData());
+						Fachada.getInstance().cadastrar(aluno);
+						JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "Cadastro Aluno", JOptionPane.INFORMATION_MESSAGE);
+						limpar();
+					}
+									
 				} catch (NegocioException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-					
 				}				
 			}
 		});
