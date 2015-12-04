@@ -7,10 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.poo.excecoes.NegocioException;
+import com.poo.negocios.Fachada;
 import com.poo.negocios.beans.Aluno;
+import com.poo.negocios.controladores.ControladorAluno;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JSplitPane;
 import javax.swing.JToggleButton;
@@ -31,6 +35,7 @@ public class TelaCadastroAluno extends JFrame {
 	private JTextField CPF;
 	private JTextField AnoIngresso;
 	private JTextField Curso;
+	private JLabel label;
 
 	/**
 	 * Create the frame.
@@ -96,38 +101,52 @@ public class TelaCadastroAluno extends JFrame {
 		});
 		btnCancelar.setBounds(60, 255, 85, 29);
 		contentPane.add(btnCancelar);
+
+		label = new JLabel("");
+		label.setBounds(171, 210, 304, 16);
+		contentPane.add(label);
 		
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-	
+				limpar();
 			}
 		});
 		btnLimpar.setBounds(157, 255, 75, 29);
 		contentPane.add(btnLimpar);
-		
 
-		JLabel label = new JLabel("");
-		label.setBounds(171, 210, 61, 16);
-		contentPane.add(label);
-		
+	
+	
 		JButton btnGerarCdigo = new JButton("Gerar C�digo");
 		btnGerarCdigo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Object o = new Object();
-				label.setText(String.valueOf(o.hashCode())); //transforma o codigo do cartao que tem retorno inteiro para String 
+				 label.setText(String.valueOf(new Object().hashCode())); //transforma o codigo do cartao que tem retorno inteiro para String 
+				 
 			}
 		});
 		btnGerarCdigo.setBounds(247, 255, 109, 29);
 		contentPane.add(btnGerarCdigo);
 		
-		JButton btnGerarCarto = new JButton("Gerar Cart�o");
+		JButton btnGerarCarto = new JButton("Cadastrar");
 		btnGerarCarto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+				float ano = Float.parseFloat(AnoIngresso.getText());
+				ControladorAluno data = new ControladorAluno();
+				data.pegarData();
+				Aluno aluno = new Aluno(Nome.getText(), CPF.getText(), Curso.getText(), ano, Integer.parseInt(label.getText()), 0.0, data.pegarData());
 				
-				setVisible(false);
-				TelaInfoCartao telaInfoCartao = new TelaInfoCartao();
-				telaInfoCartao.setVisible(true);
+					Fachada.getInstance().cadastrar(aluno);
+					JOptionPane.showMessageDialog(null, String.valueOf(aluno.getNumeroDoCartao()));
+					limpar();
+				} catch (NegocioException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					
+				}
+				
+				
+				
+				
 			}
 		});
 		btnGerarCarto.setBounds(371, 255, 104, 29);
@@ -137,6 +156,13 @@ public class TelaCadastroAluno extends JFrame {
 		lblC.setBounds(36, 210, 123, 16);
 		contentPane.add(lblC);
 		
+	}
+	private void limpar(){
+		Nome.setText("");
+		CPF.setText("");
+		AnoIngresso.setText("");
+		Curso.setText("");
+		label.setText("");
 	}
 }
 

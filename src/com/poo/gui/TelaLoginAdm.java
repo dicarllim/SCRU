@@ -74,14 +74,13 @@ public class TelaLoginAdm extends JFrame {
 					String senha = loginTexto.getText();
 				
 					try {
-						if(Fachada.getInstance().loginGestor(usuario, senha)){
+						if(Fachada.getInstance().loginGestor(usuario, senha) ){
 							setVisible(false);
 							TelaAdm telaAdm = new TelaAdm();
 							telaAdm.setVisible(true);
 						}
 					} catch (NegocioException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 			}
 		});

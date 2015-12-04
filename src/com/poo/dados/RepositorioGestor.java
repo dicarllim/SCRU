@@ -7,200 +7,121 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
+import java.util.ArrayList;
 
 import com.poo.excecoes.NegocioException;
 import com.poo.excecoes.NegocioException;
 import com.poo.negocios.beans.Gestor;
+import com.poo.negocios.beans.Gestor;
 
 
 public class RepositorioGestor implements IRepositorioGestor, Serializable{
-	private Gestor[] listaDeGestores;
-	private int proxima; //primeira posição vazia do vetor de gestor
-	private static RepositorioGestor instance;
+	private ArrayList<Gestor> listaDeGestores;
+	private static final String nomeArquivo = "cadastroalunos.dat";
 	
-	public RepositorioGestor(int tamanho){
-		this.listaDeGestores = new Gestor[tamanho];
-		this.proxima = 0;
+	
+	public RepositorioGestor(){
+		this.listaDeGestores = new ArrayList<Gestor>();
+		if(new File(nomeArquivo).canRead() == true){
+			this.lerArquivo();
+		} else{
+			this.salvarArquivo();
+		}
 	}
 	
-	public static IRepositorioGestor getInstance() {
-		if (instance == null) {
-			instance = abrirArquivo();
-		}
-		return instance;
-	}
-	
-	private static RepositorioGestor abrirArquivo(){
-
-		RepositorioGestor instanciaLocal = null;
-		File in = new File("DADOS\\CADASTRO GESTORES\\cadastrogestores.txt");
-		FileInputStream fis = null;
-		ObjectInputStream ois = null;
-		try {
-			fis = new FileInputStream(in);
-			ois = new ObjectInputStream(fis);
-			Object o = ois.readObject();
-			instanciaLocal = (RepositorioGestor) o;
-		} catch (Exception e) {
-			
-			instanciaLocal = new RepositorioGestor(50);
-			
-		} finally {
-
-			if (ois != null) {
-				try {
-					ois.close();
-				} catch (IOException e) {/* Silent exception */
-				}
-			}
-		}
-
-		return instanciaLocal;
-
-	}
-	
-	public static void salvarArquivo() {
-
-		if (instance == null) {
-			return;
-		}
-
-		File dir = new File("DADOS\\CADASTRO GESTORES");
-		dir.mkdirs();
-		File out = new File(dir,"cadastrogestores.txt");
-        
-		if (!out.exists()){
-			try{
-				out.createNewFile();				
-			} catch (IOException e){
-				/*Silent*/
-			}
-        }
+	private void lerArquivo(){
+		FileInputStream fileInput = null;
+		ObjectInputStream objectInput = null;
 		
-		FileOutputStream fos = null;
-		ObjectOutputStream oos = null;
-
+		try{
+			fileInput = new FileInputStream(nomeArquivo);
+			objectInput = new ObjectInputStream (fileInput);
+			
+			ArrayList<Gestor> gestorAuxiliar = (ArrayList<Gestor>) objectInput.readObject();
+				this.listaDeGestores.addAll(gestorAuxiliar);
+		} catch(Exception e){
+			e.printStackTrace();		
+		} finally{
+			try{
+				fileInput.close();
+				objectInput.close();
+			} catch(IOException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void salvarArquivo(){
+		
+		FileOutputStream fileOutput = null;
+		ObjectOutputStream objectOutput = null;
+		
 		try {
-			fos = new FileOutputStream(out);
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(instance);
-
+			fileOutput = new FileOutputStream(nomeArquivo);
+			objectOutput = new ObjectOutputStream(fileOutput);
+			objectOutput.writeObject(listaDeGestores);		
 		} catch (Exception e) {
-			
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
 		} finally {
-			if (oos != null) {
-				try {
-					oos.close();
-				} catch (IOException e) {/* Silent */
-				}
+			try{
+			fileOutput.close();
+			objectOutput.close();
+			} catch (Exception e){
+				e.printStackTrace();
 			}
 		}
 	}
 	
 	/**
-	 * Faz uma busca para conferir se o Gestor é cadastrado ou não cadastrado
+	 * Verifica se um aluno é realmente da faculdade ou não
 	 * 
-	 * @param gestor  
-	 * @return verdadeiro se já existe ou falso se é inexistente
+	 * @param gestor 
+	 * @return Verdadeiro se for estudante e falso se não for estudante
 	 */
 	public boolean existe(Gestor gestor){
-		boolean achou = false;
-		for(int i = 0; i <= (this.listaDeGestores.length-1);i++){
-			if(this.listaDeGestores[i].getCpf().equals(gestor.getCpf())){
-				achou = true;
+		boolean resultado = false;
+		for(int i = 0; i < this.listaDeGestores.size(); i++){
+			if(this.listaDeGestores.get(i).getCpf().equals(gestor.getCpf())){
+				resultado = true;
 			}
-		}
-		return achou;
+		} return resultado;
 	}
 	
 	/**
-	 * Adiciona um novo gestor a lista de gestores
+	 * Adiciona um novo aluno a lista de alunos
 	 * 
-	 * @param gestores
+	 * @param gestor
 	 * @throws IOException
-	 * @throws CadastroGestorExistenteException
+	 * @throws CadastroAlunoExistenteException
 	 */
 	public void inserirGestor(Gestor gestor) throws NegocioException{
-		if(!this.existe(gestor)){
-			this.listaDeGestores[this.proxima] = gestor ;
-			this.proxima++;
-			salvarArquivo();
-		}else{
-			throw new NegocioException("INSERIR - " + gestor.getNome() + " JA EXISTE!");
-		}
-		if(this.proxima == this.listaDeGestores.length){
-			this.duplicaArrayGestor();
-		}
+		this.listaDeGestores.add(gestor);
 		salvarArquivo();
 	}
 	
-	public Gestor[] listarGestores(){
+	
+	public ArrayList<Gestor> listarGestores(){
 		return this.listaDeGestores;
 	}
-	
-	private void duplicaArrayGestor() {
-
-		if (this.listaDeGestores != null && this.listaDeGestores.length > 0) {
-		    Gestor[] arrayDuplicado = new Gestor[this.listaDeGestores.length * 2];
-			for (int i = 0; i < this.listaDeGestores.length; i++) {
-				arrayDuplicado[i] = this.listaDeGestores[i];
-
-			}
-			this.listaDeGestores = arrayDuplicado;
-		}
-	}
+ 
 	/**
-	 *	Procura no Vetor/Array de Lista de Gestores o índice de um gestor específico
-	 *	dentro do if, faz a comparação se o nome do gestor que foi dado é igual ao do nome na listaDeGestores[i]
-	 *	ou seu CPF é igual ao do listaDeGestores[] 
+	 * Remove o aluno da listaDeAlunos[]
+	 * 
 	 * @param gestor
-	 * @return
+	 * @throws IOException
+	 * @throws ProcuraAlunoInexistenteException
 	 */
-	private int procurarIndice(Gestor gestor){
-		int i = 0;
-		boolean achou = false;
-
-		while ((!achou) && (i < this.proxima)) {
-			if (gestor.equals(this.listaDeGestores[i].getNome()) || gestor.equals(this.listaDeGestores[i].getCpf())) {
-				achou = true;
-			} else {
-				i = i + 1;
-			}
-		}
-		return i;
-	}
-	
-	public Gestor procurar(Gestor gestor) throws NegocioException {
-		int i = this.procurarIndice(gestor);
-		Gestor resultado = null;
-		if (i != this.proxima)
-			resultado = this.listaDeGestores[i];
-		else
-			throw new NegocioException("PROCURAR - GESTOR INEXISTENTE!");
-
-		return resultado;
-	} 
-
 	public void remover(Gestor gestor) throws NegocioException {
-		int i = this.procurarIndice(gestor);
-		if (i != this.proxima) {
-			this.listaDeGestores[i] = this.listaDeGestores[this.proxima - 1];
-			this.listaDeGestores[this.proxima - 1] = null;
-			this.proxima = this.proxima - 1;
-		}else throw new NegocioException("REMOVER - GESTOR INEXISTENTE!"); 
-
+		this.listaDeGestores.remove(gestor);
 		salvarArquivo();
 
 	}
+
 	@Override
 	public boolean equals(Gestor a, Gestor B) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
 	
 }

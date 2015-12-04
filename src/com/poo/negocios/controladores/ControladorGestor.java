@@ -1,6 +1,7 @@
 package com.poo.negocios.controladores;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.poo.dados.IRepositorioGestor;
 import com.poo.dados.RepositorioGestor;
@@ -14,11 +15,11 @@ public class ControladorGestor {
 	private IRepositorioGestor repositorio;
 	
 	public ControladorGestor(){
-			this.repositorio = RepositorioGestor.getInstance();
+			this.repositorio = new RepositorioGestor();
 	}
 	
 	public void cadastrar(Gestor gestor) throws NegocioException{
-		if(this.repositorio.existe(gestor)){
+		if(this.repositorio.existe(gestor) == false){
 			if(gestor.getNome() != null){
 				if(Validacoes.validarCPF(gestor.getCpf())){
 					if(gestor.getSenha() != null){
@@ -38,8 +39,9 @@ public class ControladorGestor {
 		}
 	}
 	
-	public Gestor[] listarGestores() {
+	public ArrayList<Gestor> listarGestores() {
 		return this.repositorio.listarGestores();
 	}
+
 
 }

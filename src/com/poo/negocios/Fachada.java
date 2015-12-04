@@ -2,10 +2,8 @@ package com.poo.negocios;
 
 import com.poo.excecoes.NegocioException;
 import com.poo.negocios.beans.Aluno;
-import com.poo.negocios.beans.Cartao;
 import com.poo.negocios.beans.Gestor;
 import com.poo.negocios.controladores.ControladorAluno;
-import com.poo.negocios.controladores.ControladorCartao;
 import com.poo.negocios.controladores.ControladorGestor;
 
 public class Fachada {
@@ -13,7 +11,6 @@ public class Fachada {
 	private static Fachada instance = null;
 	private ControladorAluno aluno;
 	private ControladorGestor gestor;
-	private ControladorCartao cartao;
 	
 	
 	
@@ -37,16 +34,16 @@ public class Fachada {
 		this.aluno.remover(aluno);
 	}
 	
-	public void creditar(Cartao cartao, double valor){
-		this.aluno.creditar(cartao, valor);
+	public void creditar(Aluno aluno, double valor){
+		this.aluno.creditar(aluno, valor);
 	}
 	
-	public void debitar(Cartao cartao, double valor){
-		this.aluno.debitar(cartao, valor);
+	public void debitar(Aluno aluno, double valor){
+		this.aluno.debitar(aluno, valor);
 	}
 	
-	public void selecionarRefeicao(int opcao, Cartao cartao) throws NegocioException{
-		this.aluno.selecionarRefeicao(opcao, cartao);
+	public void selecionarRefeicao(int opcao, Aluno aluno) throws NegocioException{
+		this.aluno.selecionarRefeicao(opcao, aluno);
 	}
 	
 
@@ -55,20 +52,18 @@ public class Fachada {
 	}
 	
 	public boolean loginGestor(String login, String senha) throws NegocioException{
-		if (gestor.listarGestores().length < 1) {
-			throw new NegocioException("teste");
-		}else {
-				for(int i = 0; i < gestor.listarGestores().length; i++){
-						if(gestor.listarGestores()[i].getCpf().equals(login) && gestor.listarGestores()[i].getSenha().equals(senha)){
-							return true;
+		boolean resultado = false;
+				for(int i = 0; i < gestor.listarGestores().size(); i++){
+						if(gestor.listarGestores().get(i).getCpf().equals(login) /*&& gestor.listarGestores().get(i).getSenha().equals(senha)*/){
+							resultado = true;
 						}
 				}
-				return false;
-			}
-	}
-	
-	public void cadastrar(Cartao cartao) throws NegocioException{
-		this.cartao.cadastrar(cartao);
+		if(resultado == true){
+			return true;
+		}else{
+			throw new NegocioException("LOGIN/SENHA INCORRETOS!");
+		}
+			
 	}
 	
 }

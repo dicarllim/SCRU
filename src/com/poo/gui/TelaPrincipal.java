@@ -73,8 +73,8 @@ public class TelaPrincipal extends JFrame {
 				setVisible(false);
 				TelaAdm telaAdm = new TelaAdm();
 				telaAdm.setVisible(true);
-				//TelaLoginAdm telaLoginAdm = new TelaLoginAdm();
-				//telaLoginAdm.setVisible(true);
+				TelaLoginAdm telaLoginAdm = new TelaLoginAdm();
+				telaLoginAdm.setVisible(true);
 			}
 		});
 		btnAdministrador.setForeground(new Color(178, 34, 34));
