@@ -71,8 +71,8 @@ public class Fachada {
 		}
 	}
 	
-	public boolean desativar(String cpf){
-		return this.aluno.desativar(cpf);
+	public void desativar(String cpf) throws NegocioException{
+		this.aluno.desativar(cpf);
 	}
 	
 	public void atualizarGestor(Gestor gestor) throws NegocioException{

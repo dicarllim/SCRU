@@ -8,9 +8,9 @@ import com.poo.negocios.beans.Aluno;
 public interface IRepositorioAluno {
 
 	public boolean existe(Aluno aluno);
-	public void inserirAluno(Aluno aluno) throws NegocioException;
+	public void inserirAluno(Aluno aluno);
 	public ArrayList<Aluno> listarAlunos();
-	public void remover(Aluno aluno) throws NegocioException;
+	public void remover(Aluno aluno);
 	boolean equals(Aluno a, Aluno B);
 	public void atualizar(Aluno aluno);
 	

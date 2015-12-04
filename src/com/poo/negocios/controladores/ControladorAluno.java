@@ -27,7 +27,7 @@ public class ControladorAluno {
 					if(aluno.getCurso().trim().length() > 2 ){
 						if(aluno.getAnoIngresso() > 0){
 							if(aluno.getNumeroDoCartao() > 0){
-							//	aluno.setSaldo(0);
+								aluno.setSaldo(0);
 								this.repositorio.inserirAluno(aluno);		
 							}else{
 								throw new NegocioException("CADASTRAR - CARTAO INVALIDO");
@@ -97,20 +97,17 @@ public class ControladorAluno {
 		
 	}
 	
-	public boolean desativar(String cpf){
+	public void desativar(String cpf) throws NegocioException{
 		boolean resultado = false;
 		for(int i = 0; i< this.listarAlunos().size();i++ ){
 			if(this.listarAlunos().get(i).getCpf().equals(cpf)){
-				try{	
 					this.repositorio.remover(this.repositorio.listarAlunos().get(i));
 					resultado = true;
-				} catch(NegocioException e){
-					
-				}
 			}
-
 		}
-		return resultado;
+		if(resultado == false){
+			throw new NegocioException("Aluno inexistente");
+		}
 	}
 	
 	public static String pegarData(){

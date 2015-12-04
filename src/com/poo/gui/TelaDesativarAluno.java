@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.poo.excecoes.NegocioException;
 import com.poo.negocios.Fachada;
 
 import java.awt.Color;
@@ -64,13 +65,14 @@ public class TelaDesativarAluno extends JFrame {
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Fachada.getInstance().desativar(cpf.getText()) == true){
-			           JOptionPane.showMessageDialog(null, "Aluno Removido!", "Desativar Aluno", JOptionPane.INFORMATION_MESSAGE);
-			        }
-					else{
-						JOptionPane.showMessageDialog(null, "CPF INVALIDO", "ERRO", JOptionPane.ERROR_MESSAGE);
-					}
-				limpar();
+				try{
+					Fachada.getInstance().desativar(cpf.getText());
+	           	JOptionPane.showMessageDialog(null, "Aluno Removido!", "Desativar Aluno", JOptionPane.INFORMATION_MESSAGE);
+				} catch (NegocioException e1){
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+				}finally{
+					limpar();
+				}
 			}
 		});
 		btnConfirmar.setBounds(235, 196, 117, 29);

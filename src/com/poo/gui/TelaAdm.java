@@ -101,8 +101,8 @@ public class TelaAdm extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				TelaLoginAdm telaLoginAdm = new TelaLoginAdm();
-				telaLoginAdm.setVisible(true);
+				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				telaPrincipal.setVisible(true);
 			}
 		});
 		btnSair.setForeground(new Color(169, 169, 169));

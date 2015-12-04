@@ -95,7 +95,7 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 	 * @throws IOException
 	 * @throws CadastroAlunoExistenteException
 	 */
-	public void inserirAluno(Aluno aluno) throws NegocioException{
+	public void inserirAluno(Aluno aluno){
 		this.listaDeAlunos.add(aluno);
 		salvarArquivo();
 	}
@@ -112,7 +112,7 @@ public class RepositorioAluno implements IRepositorioAluno, Serializable{
 	 * @throws IOException
 	 * @throws ProcuraAlunoInexistenteException
 	 */
-	public void remover(Aluno aluno) throws NegocioException {
+	public void remover(Aluno aluno){
 		this.listaDeAlunos.remove(aluno);
 		salvarArquivo();
 

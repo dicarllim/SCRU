@@ -39,7 +39,7 @@ public class TelaRecarga extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRecarregarCarto = new JLabel("RECARREGAR CARTÃO");
+		JLabel lblRecarregarCarto = new JLabel("RECARREGAR CARTï¿½O");
 		lblRecarregarCarto.setFont(new Font("Georgia", Font.BOLD, 20));
 		lblRecarregarCarto.setBounds(140, 60, 255, 25);
 		contentPane.add(lblRecarregarCarto);
@@ -49,7 +49,7 @@ public class TelaRecarga extends JFrame {
 		contentPane.add(numeroCartao);
 		numeroCartao.setColumns(10);
 		
-		JLabel lblNmeroCarto = new JLabel("Número do cartão:");
+		JLabel lblNmeroCarto = new JLabel("Nï¿½mero do cartï¿½o:");
 		lblNmeroCarto.setBounds(125, 118, 121, 16);
 		contentPane.add(lblNmeroCarto);
 		
@@ -91,8 +91,10 @@ public class TelaRecarga extends JFrame {
 					Fachada.getInstance().creditar(codigo, valor1);
 					JOptionPane.showMessageDialog(null, "Recarga feita com sucesso!", "Recarga", JOptionPane.INFORMATION_MESSAGE);
 					limpar();
+					TelaAdm telaAdm = new TelaAdm();
+					telaAdm.setVisible(true);
 				}catch(NegocioException e1){
-					e1.getMessage();
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

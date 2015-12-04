@@ -93,7 +93,7 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 	 * @throws IOException
 	 * @throws CadastroAlunoExistenteException
 	 */
-	public void inserirGestor(Gestor gestor) throws NegocioException{
+	public void inserirGestor(Gestor gestor){
 		this.listaDeGestores.add(gestor);
 		salvarArquivo();
 	}
@@ -110,7 +110,7 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 	 * @throws IOException
 	 * @throws ProcuraAlunoInexistenteException
 	 */
-	public void remover(Gestor gestor) throws NegocioException {
+	public void remover(Gestor gestor){
 		this.listaDeGestores.remove(gestor);
 		salvarArquivo();
 
