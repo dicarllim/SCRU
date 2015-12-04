@@ -41,15 +41,15 @@ public class TelaSaldo extends JFrame {
 		JLabel lblSaldo = new JLabel("SALDO DISPONIVEL:");
 		lblSaldo.setFont(new Font("Consolas", Font.BOLD, 25));
 		lblSaldo.setForeground(new Color(144, 238, 144));
-		lblSaldo.setBounds(70, 162, 238, 31);
+		lblSaldo.setBounds(83, 162, 238, 31);
 		contentPane.add(lblSaldo);
 		
 		JTextPane infoSaldo = new JTextPane();
 		infoSaldo.setForeground(new Color(144, 238, 144));
-		infoSaldo.setFont(new Font("Consolas", Font.PLAIN, 25));
+		infoSaldo.setFont(new Font("Consolas", Font.PLAIN, 30));
 		infoSaldo.setEditable(false);
 		infoSaldo.setBackground(new Color(255, 255, 255));
-		infoSaldo.setBounds(320, 162, 48, 31);
+		infoSaldo.setBounds(331, 151, 64, 42);
 		contentPane.add(infoSaldo);
 		infoSaldo.setText(String.valueOf(saldo));
 		

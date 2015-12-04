@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.UIManager;
 
 public class TelaPrincipal extends JFrame {
 
@@ -63,7 +64,7 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		btnAlunoUfrpe.setForeground(new Color(244, 164, 96));
-		btnAlunoUfrpe.setBackground(Color.WHITE);
+		btnAlunoUfrpe.setBackground(UIManager.getColor("Button.background"));
 		btnAlunoUfrpe.setBounds(101, 159, 155, 72);
 		contentPane.add(btnAlunoUfrpe);
 		

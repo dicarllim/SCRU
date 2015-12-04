@@ -57,11 +57,11 @@ public class TelaNumeroCartao extends JFrame {
 		lblDigiteONmero.setForeground(new Color(255, 140, 0));
 		lblDigiteONmero.setBackground(new Color(255, 140, 0));
 		lblDigiteONmero.setFont(new Font("Consolas", Font.PLAIN, 18));
-		lblDigiteONmero.setBounds(135, 111, 288, 29);
+		lblDigiteONmero.setBounds(113, 96, 288, 29);
 		contentPane.add(lblDigiteONmero);
 		
 		numeroCartao = new JTextField();
-		numeroCartao.setBounds(113, 152, 308, 28);
+		numeroCartao.setBounds(93, 149, 308, 28);
 		contentPane.add(numeroCartao);
 		numeroCartao.setColumns(10);
 		
@@ -79,8 +79,8 @@ public class TelaNumeroCartao extends JFrame {
 			}
 		});
 		btnEnter.setForeground(new Color(119, 136, 153));
-		btnEnter.setBackground(new Color(119, 136, 153));
-		btnEnter.setBounds(264, 192, 117, 29);
+		btnEnter.setBackground(Color.WHITE);
+		btnEnter.setBounds(255, 205, 117, 29);
 		contentPane.add(btnEnter);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -92,7 +92,7 @@ public class TelaNumeroCartao extends JFrame {
 			}
 		});
 		btnCancelar.setForeground(new Color(119, 136, 153));
-		btnCancelar.setBounds(149, 192, 117, 29);
+		btnCancelar.setBounds(128, 205, 117, 29);
 		contentPane.add(btnCancelar);
 	}
 }

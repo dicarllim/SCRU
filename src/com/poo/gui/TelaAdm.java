@@ -14,6 +14,7 @@ import javax.swing.JSeparator;
 import javax.swing.JToolBar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.UIManager;
 
 public class TelaAdm extends JFrame {
 
@@ -41,7 +42,7 @@ public class TelaAdm extends JFrame {
 			}
 		});
 		btnCadastrarAluno.setForeground(new Color(105, 105, 105));
-		btnCadastrarAluno.setBounds(63, 100, 186, 83);
+		btnCadastrarAluno.setBounds(65, 84, 186, 83);
 		contentPane.add(btnCadastrarAluno);
 		
 		JButton btnCadastrarGestor = new JButton("CADASTRAR GESTOR");
@@ -54,7 +55,7 @@ public class TelaAdm extends JFrame {
 			}
 		});
 		btnCadastrarGestor.setForeground(new Color(105, 105, 105));
-		btnCadastrarGestor.setBounds(261, 100, 186, 83);
+		btnCadastrarGestor.setBounds(261, 84, 186, 83);
 		contentPane.add(btnCadastrarGestor);
 		
 		JButton btnDesativarAluno = new JButton("DESATIVAR ALUNO");
@@ -67,7 +68,7 @@ public class TelaAdm extends JFrame {
 			}
 		});
 		btnDesativarAluno.setForeground(new Color(105, 105, 105));
-		btnDesativarAluno.setBounds(63, 195, 186, 83);
+		btnDesativarAluno.setBounds(65, 178, 186, 83);
 		contentPane.add(btnDesativarAluno);
 		
 		JButton btnRecarregamento = new JButton("RECARREGAMENTO");
@@ -80,20 +81,20 @@ public class TelaAdm extends JFrame {
 			}
 		});
 		btnRecarregamento.setForeground(new Color(105, 105, 105));
-		btnRecarregamento.setBounds(261, 195, 186, 83);
+		btnRecarregamento.setBounds(261, 178, 186, 83);
 		contentPane.add(btnRecarregamento);
 		
 		JLabel lblPortalDoAdministrador = new JLabel("PORTAL DO ADMINISTRADOR");
 		lblPortalDoAdministrador.setForeground(new Color(0, 0, 0));
 		lblPortalDoAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPortalDoAdministrador.setBounds(110, 60, 289, 16);
+		lblPortalDoAdministrador.setBounds(109, 47, 289, 16);
 		contentPane.add(lblPortalDoAdministrador);
 		
 		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSITARIO UFRPE");
 		lblRestauranteUniversitrioUfrpe.setBackground(new Color(220, 220, 220));
 		lblRestauranteUniversitrioUfrpe.setForeground(new Color(255, 255, 255));
 		lblRestauranteUniversitrioUfrpe.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		lblRestauranteUniversitrioUfrpe.setBounds(155, 41, 199, 16);
+		lblRestauranteUniversitrioUfrpe.setBounds(156, 31, 199, 16);
 		contentPane.add(lblRestauranteUniversitrioUfrpe);
 		
 		JButton btnSair = new JButton("Logout");
@@ -106,8 +107,12 @@ public class TelaAdm extends JFrame {
 			}
 		});
 		btnSair.setForeground(new Color(169, 169, 169));
-		btnSair.setBackground(new Color(255, 255, 255));
-		btnSair.setBounds(6, 290, 69, 27);
+		btnSair.setBackground(UIManager.getColor("Button.background"));
+		btnSair.setBounds(23, 272, 69, 27);
 		contentPane.add(btnSair);
+		
+		JToolBar toolBar = new JToolBar();
+		toolBar.setBounds(0, 0, 87, 16);
+		contentPane.add(toolBar);
 	}
 }

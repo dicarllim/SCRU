@@ -39,7 +39,7 @@ public class TelaRecarga extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRecarregarCarto = new JLabel("RECARREGAR CART�O");
+		JLabel lblRecarregarCarto = new JLabel("RECARREGAR CARTAO");
 		lblRecarregarCarto.setFont(new Font("Georgia", Font.BOLD, 20));
 		lblRecarregarCarto.setBounds(140, 60, 255, 25);
 		contentPane.add(lblRecarregarCarto);
@@ -49,7 +49,7 @@ public class TelaRecarga extends JFrame {
 		contentPane.add(numeroCartao);
 		numeroCartao.setColumns(10);
 		
-		JLabel lblNmeroCarto = new JLabel("N�mero do cart�o:");
+		JLabel lblNmeroCarto = new JLabel("Numero do cartao:");
 		lblNmeroCarto.setBounds(125, 118, 121, 16);
 		contentPane.add(lblNmeroCarto);
 		

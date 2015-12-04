@@ -100,7 +100,7 @@ public class TelaLoginAdm extends JFrame {
 		btnCancelar.setBounds(149, 234, 117, 29);
 		contentPane.add(btnCancelar);
 		
-		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSIT�RIO UFRPE");
+		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSITARIO UFRPE");
 		lblRestauranteUniversitrioUfrpe.setForeground(new Color(211, 211, 211));
 		lblRestauranteUniversitrioUfrpe.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		lblRestauranteUniversitrioUfrpe.setBounds(174, 72, 206, 16);
