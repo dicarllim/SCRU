@@ -130,7 +130,6 @@ public class TelaCadastroAluno extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					float ano = 0;
-					
 					String anoString = AnoIngresso.getText();
 					if(anoString.trim().equals("")){
 						JOptionPane.showMessageDialog(null, "Ano invalido", "", JOptionPane.ERROR_MESSAGE);
