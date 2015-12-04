@@ -50,5 +50,6 @@ public class TelaSaldo extends JFrame {
 		infoSaldo.setBounds(282, 168, 143, 31);
 		contentPane.add(infoSaldo);
 		
+		
 		}
 	}

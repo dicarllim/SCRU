@@ -58,16 +58,44 @@ public class ControladorAluno {
 		this.repositorio.remover(aluno);
 	}
 	
-	public void creditar(Aluno aluno, double valor){
+	public void creditar(int codigo, double valor) throws NegocioException{
+		Aluno aluno = null;
 		if(valor>0){
-			aluno.setSaldo(aluno.getSaldo() + valor);
+			
+			for(int i = 0; i < this.listarAlunos().size() ; i++){
+				if(this.listarAlunos().get(i).getNumeroDoCartao() == codigo){
+					aluno = this.listarAlunos().get(i);
+				}
+			}
+			if(aluno != null){
+				aluno.setSaldo(aluno.getSaldo() + valor);
+			}
+			else{
+				throw new NegocioException("Código inválido");
+			}	
 		}
+		else
+			throw new NegocioException("Você não pode creditar 0 ou um valor negativo");
 	}
 	
-	public void debitar(Aluno aluno, double valor){
-		if(valor > 0){
-			 aluno.setSaldo(aluno.getSaldo() - valor);
+	public void debitar(int codigo, double valor) throws NegocioException{
+		Aluno aluno = null;
+		if(valor>0){
+			
+			for(int i = 0; i < this.listarAlunos().size() ; i++){
+				if(this.listarAlunos().get(i).getNumeroDoCartao() == codigo){
+					aluno = this.listarAlunos().get(i);
+				}
+			}
+			if(aluno != null){
+				aluno.setSaldo(aluno.getSaldo() - valor);
+			}
+			else{
+				throw new NegocioException("Código inválido");
+			}	
 		}
+		else
+			throw new NegocioException("Você não pode debitar 0 ou um valor negativo");
 		
 	}
 	
@@ -87,11 +115,11 @@ public class ControladorAluno {
 		return resultado;
 	}
 	
-	public void selecionarRefeicao(int opcao, Aluno aluno) throws NegocioException{
+	public void selecionarRefeicao(int opcao, int codigo) throws NegocioException{
 		if(opcao == 1 ){
-			this.debitar(aluno, 2.0);
+			this.debitar(codigo, 2.0);
 		}else if(opcao == 2){
-			this.debitar(aluno, 1.5);
+			this.debitar(codigo, 1.5);
 		}else{
 			throw new NegocioException("REFEICAO INVALIDA!");
 		}

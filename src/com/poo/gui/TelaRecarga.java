@@ -6,19 +6,26 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.poo.excecoes.NegocioException;
+import com.poo.negocios.Fachada;
+
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaRecarga extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JPasswordField passwordField;
+	private JTextField numeroCartao;
+	private JTextField valor;
 
 	/**
 	 * Create the frame.
@@ -37,10 +44,10 @@ public class TelaRecarga extends JFrame {
 		lblRecarregarCarto.setBounds(140, 60, 255, 25);
 		contentPane.add(lblRecarregarCarto);
 		
-		textField = new JTextField();
-		textField.setBounds(219, 114, 192, 25);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		numeroCartao = new JTextField();
+		numeroCartao.setBounds(219, 114, 192, 25);
+		contentPane.add(numeroCartao);
+		numeroCartao.setColumns(10);
 		
 		JLabel lblNmeroCarto = new JLabel("Número do cartão:");
 		lblNmeroCarto.setBounds(125, 118, 121, 16);
@@ -50,29 +57,51 @@ public class TelaRecarga extends JFrame {
 		lblValor.setBounds(184, 147, 61, 16);
 		contentPane.add(lblValor);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(220, 142, 134, 26);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblSenhaAdm = new JLabel("Senha ADM:");
-		lblSenhaAdm.setBounds(153, 179, 78, 16);
-		contentPane.add(lblSenhaAdm);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(220, 175, 134, 25);
-		contentPane.add(passwordField);
+		valor = new JTextField();
+		valor.setBounds(220, 142, 134, 26);
+		contentPane.add(valor);
+		valor.setColumns(10);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(73, 243, 117, 29);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TelaAdm telaAdm = new TelaAdm();
+				telaAdm.setVisible(true);
+			}
+		});
+		btnCancelar.setBounds(72, 215, 117, 29);
 		contentPane.add(btnCancelar);
 		
 		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setBounds(199, 243, 117, 29);
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpar();
+			}
+		});
+		btnLimpar.setBounds(199, 215, 117, 29);
 		contentPane.add(btnLimpar);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setBounds(326, 243, 117, 29);
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int codigo = (int)Integer.parseInt(numeroCartao.getText());
+				double valor1 = (double)Double.parseDouble(valor.getText());
+				try{
+					Fachada.getInstance().creditar(codigo, valor1);
+					JOptionPane.showMessageDialog(null, "Recarga feita com sucesso!", "Recarga", JOptionPane.INFORMATION_MESSAGE);
+					limpar();
+				}catch(NegocioException e1){
+					e1.getMessage();
+				}
+			}
+		});
+		btnConfirmar.setBounds(326, 215, 117, 29);
 		contentPane.add(btnConfirmar);
+	}
+	
+	private void limpar(){
+		numeroCartao.setText("");
+		valor.setText("");
 	}
 }

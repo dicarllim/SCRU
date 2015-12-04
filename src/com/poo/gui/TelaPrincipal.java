@@ -57,6 +57,7 @@ public class TelaPrincipal extends JFrame {
 		JButton btnAlunoUfrpe = new JButton("ALUNO UFRPE");
 		btnAlunoUfrpe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				TelaNumeroCartao telaNumeroCartao =  new TelaNumeroCartao();
 				telaNumeroCartao.setVisible(true);
 			}

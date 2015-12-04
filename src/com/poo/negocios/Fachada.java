@@ -34,16 +34,16 @@ public class Fachada {
 		this.aluno.remover(aluno);
 	}
 	
-	public void creditar(Aluno aluno, double valor){
-		this.aluno.creditar(aluno, valor);
+	public void creditar(int codigo, double valor) throws NegocioException{
+		this.aluno.creditar(codigo, valor);
 	}
 	
-	public void debitar(Aluno aluno, double valor){
-		this.aluno.debitar(aluno, valor);
+	public void debitar(int codigo, double valor)throws NegocioException{
+		this.aluno.debitar(codigo, valor);
 	}
 	
-	public void selecionarRefeicao(int opcao, Aluno aluno) throws NegocioException{
-		this.aluno.selecionarRefeicao(opcao, aluno);
+	public void selecionarRefeicao(int opcao, int codigo) throws NegocioException{
+		this.aluno.selecionarRefeicao(opcao, codigo);
 	}
 	
 
@@ -54,7 +54,7 @@ public class Fachada {
 	public boolean loginGestor(String login, String senha) throws NegocioException{
 		boolean resultado = false;
 				for(int i = 0; i < gestor.listarGestores().size(); i++){
-						if(gestor.listarGestores().get(i).getCpf().equals(login) /*&& gestor.listarGestores().get(i).getSenha().equals(senha)*/){
+						if(gestor.listarGestores().get(i).getCpf().equals(login) && gestor.listarGestores().get(i).getSenha().equals(senha)){
 							resultado = true;
 						}
 				}
