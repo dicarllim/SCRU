@@ -48,7 +48,7 @@ public class TelaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRestauranteUniversitrio = new JLabel("RESTAURANTE UNIVERSITï¿½RIO");
+		JLabel lblRestauranteUniversitrio = new JLabel("RESTAURANTE UNIVERSITÁRIO");
 		lblRestauranteUniversitrio.setForeground(new Color(244, 164, 96));
 		lblRestauranteUniversitrio.setFont(new Font("Georgia", Font.PLAIN, 25));
 		lblRestauranteUniversitrio.setBounds(64, 57, 411, 56);
@@ -71,8 +71,6 @@ public class TelaPrincipal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				setVisible(false);
-				TelaAdm telaAdm = new TelaAdm();
-				telaAdm.setVisible(true);
 				TelaLoginAdm telaLoginAdm = new TelaLoginAdm();
 				telaLoginAdm.setVisible(true);
 			}

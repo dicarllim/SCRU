@@ -6,16 +6,23 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.poo.negocios.Fachada;
+
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaDesativarAluno extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField cpf;
 
 	/**
 	 * Create the frame.
@@ -35,21 +42,42 @@ public class TelaDesativarAluno extends JFrame {
 		contentPane.add(lblDesativarAluno);
 		
 		JLabel lblDigiteOCpf = new JLabel("Digite o CPF do Aluno:");
-		lblDigiteOCpf.setBounds(88, 129, 142, 16);
+		lblDigiteOCpf.setBounds(73, 129, 157, 16);
 		contentPane.add(lblDigiteOCpf);
 		
-		textField = new JTextField();
-		textField.setBounds(200, 123, 170, 28);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		cpf = new JTextField();
+		cpf.setBounds(200, 123, 170, 28);
+		contentPane.add(cpf);
+		cpf.setColumns(10);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TelaAdm telaAdm = new TelaAdm();
+				telaAdm.setVisible(true);
+			}
+		});
 		btnCancelar.setBounds(113, 196, 117, 29);
 		contentPane.add(btnCancelar);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Fachada.getInstance().desativar(cpf.getText()) == true){
+			           JOptionPane.showMessageDialog(null, "Aluno Removido!", "Desativar Aluno", JOptionPane.INFORMATION_MESSAGE);
+			        }
+					else{
+						JOptionPane.showMessageDialog(null, "CPF INVALIDO", "ERRO", JOptionPane.ERROR_MESSAGE);
+					}
+				limpar();
+			}
+		});
 		btnConfirmar.setBounds(235, 196, 117, 29);
 		contentPane.add(btnConfirmar);
+	}
+	private void limpar(){
+		cpf.setText("");
 	}
 
 }

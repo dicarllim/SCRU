@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.poo.negocios.Fachada;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -31,7 +34,7 @@ public class TelaAluno extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblSelecioneAOpo = new JLabel("SELECIONE A OP��O DESEJADA:");
+		JLabel lblSelecioneAOpo = new JLabel("SELECIONE A OPCAO DESEJADA:");
 		lblSelecioneAOpo.setBackground(new Color(165, 42, 42));
 		lblSelecioneAOpo.setForeground(new Color(165, 42, 42));
 		lblSelecioneAOpo.setFont(new Font("Consolas", Font.BOLD, 18));
@@ -50,12 +53,13 @@ public class TelaAluno extends JFrame {
 		btnJantarr.setBounds(96, 185, 335, 58);
 		contentPane.add(btnJantarr);
 		
-		JButton btnAlmoor = new JButton("ALMO�O (R$2,00)");
+		JButton btnAlmoor = new JButton("ALMOCO (R$2,00)");
 		btnAlmoor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				TelaSaldo telaSaldo = new TelaSaldo();
 				telaSaldo.setVisible(true);
+				
 			}
 		});
 		btnAlmoor.addMouseListener(new MouseAdapter() {

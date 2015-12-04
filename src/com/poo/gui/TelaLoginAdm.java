@@ -85,7 +85,7 @@ public class TelaLoginAdm extends JFrame {
 			}
 		});
 		btnEnter.setForeground(new Color(107, 142, 35));
-		btnEnter.setBounds(144, 234, 117, 29);
+		btnEnter.setBounds(276, 234, 117, 29);
 		contentPane.add(btnEnter);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -97,10 +97,10 @@ public class TelaLoginAdm extends JFrame {
 			}
 		});
 		btnCancelar.setForeground(new Color(165, 42, 42));
-		btnCancelar.setBounds(263, 234, 117, 29);
+		btnCancelar.setBounds(149, 234, 117, 29);
 		contentPane.add(btnCancelar);
 		
-		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSITï¿½RIO UFRPE");
+		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSITÁRIO UFRPE");
 		lblRestauranteUniversitrioUfrpe.setForeground(new Color(211, 211, 211));
 		lblRestauranteUniversitrioUfrpe.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		lblRestauranteUniversitrioUfrpe.setBounds(174, 72, 206, 16);

@@ -6,18 +6,28 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.poo.excecoes.NegocioException;
+import com.poo.negocios.Fachada;
+import com.poo.negocios.beans.Gestor;
+
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaCadastroGestor extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField nome;
+	private JTextField cpf;
+	private JPasswordField senha;
 
 	/**
 	 * Create the frame.
@@ -48,32 +58,59 @@ public class TelaCadastroGestor extends JFrame {
 		lblSenha.setBounds(110, 185, 61, 16);
 		contentPane.add(lblSenha);
 		
-		textField = new JTextField();
-		textField.setBounds(156, 109, 292, 28);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		nome = new JTextField();
+		nome.setBounds(156, 109, 292, 28);
+		contentPane.add(nome);
+		nome.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(156, 145, 134, 28);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(156, 179, 134, 28);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		cpf = new JTextField();
+		cpf.setBounds(156, 145, 134, 28);
+		contentPane.add(cpf);
+		cpf.setColumns(10);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TelaAdm telaAdm = new TelaAdm();
+				telaAdm.setVisible(true);
+			}
+		});
 		btnCancelar.setBounds(64, 234, 117, 29);
 		contentPane.add(btnCancelar);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				limpar();
+			}
+		});
 		btnLimpar.setBounds(191, 234, 117, 29);
 		contentPane.add(btnLimpar);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					Gestor gestor = new Gestor(nome.getText(), cpf.getText(), String.copyValueOf(senha.getPassword()));
+					Fachada.getInstance().cadastrar(gestor);
+					JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "Cadastro Gestor", JOptionPane.INFORMATION_MESSAGE);
+					limpar();
+				} catch(NegocioException e2){
+					JOptionPane.showMessageDialog(null, e2.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		btnConfirmar.setBounds(318, 234, 117, 29);
 		contentPane.add(btnConfirmar);
+		
+		senha = new JPasswordField();
+		senha.setBounds(156, 183, 134, 25);
+		contentPane.add(senha);
 	}
-
+	private void limpar(){
+		nome.setText("");
+		cpf.setText("");
+		senha.setText("");
+	}
 }

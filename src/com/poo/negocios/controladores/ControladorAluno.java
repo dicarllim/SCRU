@@ -71,6 +71,22 @@ public class ControladorAluno {
 		
 	}
 	
+	public boolean desativar(String cpf){
+		boolean resultado = false;
+		for(int i = 0; i< this.listarAlunos().size();i++ ){
+			if(this.listarAlunos().get(i).getCpf().equals(cpf)){
+				try {
+					this.remover(this.listarAlunos().get(i));
+					resultado = true;
+				} catch (NegocioException e) {
+					
+				}
+			}
+
+		}
+		return resultado;
+	}
+	
 	public void selecionarRefeicao(int opcao, Aluno aluno) throws NegocioException{
 		if(opcao == 1 ){
 			this.debitar(aluno, 2.0);

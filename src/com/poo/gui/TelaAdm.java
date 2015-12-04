@@ -35,6 +35,7 @@ public class TelaAdm extends JFrame {
 		btnCadastrarAluno.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
 				TelaCadastroAluno telaCadastroAluno = new TelaCadastroAluno();
 				telaCadastroAluno.setVisible(true);
 			}
@@ -47,6 +48,7 @@ public class TelaAdm extends JFrame {
 		btnCadastrarGestor.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				setVisible(false);
 				TelaCadastroGestor telaCadastroGestor = new TelaCadastroGestor();
 				telaCadastroGestor.setVisible(true);
 			}
@@ -59,6 +61,7 @@ public class TelaAdm extends JFrame {
 		btnDesativarAluno.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
 				TelaDesativarAluno telaDesativarAluno = new TelaDesativarAluno();
 				telaDesativarAluno.setVisible(true);
 			}
@@ -71,6 +74,7 @@ public class TelaAdm extends JFrame {
 		btnRecarregamento.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
 				TelaRecarga telaRecarga = new TelaRecarga();
 				telaRecarga.setVisible(true);
 			}
@@ -85,7 +89,7 @@ public class TelaAdm extends JFrame {
 		lblPortalDoAdministrador.setBounds(110, 60, 289, 16);
 		contentPane.add(lblPortalDoAdministrador);
 		
-		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSIT�RIO UFRPE");
+		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSITARIO UFRPE");
 		lblRestauranteUniversitrioUfrpe.setBackground(new Color(220, 220, 220));
 		lblRestauranteUniversitrioUfrpe.setForeground(new Color(255, 255, 255));
 		lblRestauranteUniversitrioUfrpe.setFont(new Font("Lucida Grande", Font.PLAIN, 11));

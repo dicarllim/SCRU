@@ -17,7 +17,7 @@ import com.poo.negocios.beans.Gestor;
 
 public class RepositorioGestor implements IRepositorioGestor, Serializable{
 	private ArrayList<Gestor> listaDeGestores;
-	private static final String nomeArquivo = "cadastroalunos.dat";
+	private static final String nomeArquivo = "cadastrogestor.dat";
 	
 	
 	public RepositorioGestor(){
@@ -74,10 +74,7 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 	}
 	
 	/**
-	 * Verifica se um aluno é realmente da faculdade ou não
-	 * 
-	 * @param gestor 
-	 * @return Verdadeiro se for estudante e falso se não for estudante
+	 * Checa se o gestor existe
 	 */
 	public boolean existe(Gestor gestor){
 		boolean resultado = false;
@@ -89,7 +86,7 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 	}
 	
 	/**
-	 * Adiciona um novo aluno a lista de alunos
+	 * Adiciona um novo gestor a lista de gestores
 	 * 
 	 * @param gestor
 	 * @throws IOException
@@ -106,7 +103,7 @@ public class RepositorioGestor implements IRepositorioGestor, Serializable{
 	}
  
 	/**
-	 * Remove o aluno da listaDeAlunos[]
+	 * Remove o gestor da listaDeAlunos[]
 	 * 
 	 * @param gestor
 	 * @throws IOException

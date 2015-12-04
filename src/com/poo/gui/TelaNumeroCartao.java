@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 public class TelaNumeroCartao extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField numeroCartao;
 
 	/**
 	 * Launch the application.
@@ -47,19 +47,19 @@ public class TelaNumeroCartao extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblDigiteONmero = new JLabel("DIGITE O NÚMERO DO CARTÃO:");
+		JLabel lblDigiteONmero = new JLabel("DIGITE O NUMERO DO CARTAO:");
 		lblDigiteONmero.setForeground(new Color(255, 140, 0));
 		lblDigiteONmero.setBackground(new Color(255, 140, 0));
 		lblDigiteONmero.setFont(new Font("Consolas", Font.PLAIN, 18));
 		lblDigiteONmero.setBounds(135, 111, 288, 29);
 		contentPane.add(lblDigiteONmero);
 		
-		textField = new JTextField();
-		textField.setBounds(113, 152, 308, 28);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		numeroCartao = new JTextField();
+		numeroCartao.setBounds(113, 152, 308, 28);
+		contentPane.add(numeroCartao);
+		numeroCartao.setColumns(10);
 		
-		JButton btnEnter = new JButton("Enter");
+		JButton btnEnter = new JButton("Entrar");
 		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -73,6 +73,13 @@ public class TelaNumeroCartao extends JFrame {
 		contentPane.add(btnEnter);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				telaPrincipal.setVisible(true);
+			}
+		});
 		btnCancelar.setForeground(new Color(119, 136, 153));
 		btnCancelar.setBounds(149, 192, 117, 29);
 		contentPane.add(btnCancelar);

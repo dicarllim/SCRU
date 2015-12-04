@@ -114,10 +114,8 @@ public class TelaCadastroAluno extends JFrame {
 		});
 		btnLimpar.setBounds(157, 255, 75, 29);
 		contentPane.add(btnLimpar);
-
 	
-	
-		JButton btnGerarCdigo = new JButton("Gerar Cï¿½digo");
+		JButton btnGerarCdigo = new JButton("Gerar Código");
 		btnGerarCdigo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 label.setText(String.valueOf(new Object().hashCode())); //transforma o codigo do cartao que tem retorno inteiro para String 
@@ -137,22 +135,18 @@ public class TelaCadastroAluno extends JFrame {
 				Aluno aluno = new Aluno(Nome.getText(), CPF.getText(), Curso.getText(), ano, Integer.parseInt(label.getText()), 0.0, data.pegarData());
 				
 					Fachada.getInstance().cadastrar(aluno);
-					JOptionPane.showMessageDialog(null, String.valueOf(aluno.getNumeroDoCartao()));
+					JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "Cadastro Aluno", JOptionPane.INFORMATION_MESSAGE);
 					limpar();
 				} catch (NegocioException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage());
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 					
-				}
-				
-				
-				
-				
+				}				
 			}
 		});
 		btnGerarCarto.setBounds(371, 255, 104, 29);
 		contentPane.add(btnGerarCarto);
 		
-		JLabel lblC = new JLabel("CÃ³digo do CartÃ£o:");
+		JLabel lblC = new JLabel("Código do Cartão:");
 		lblC.setBounds(36, 210, 123, 16);
 		contentPane.add(lblC);
 		

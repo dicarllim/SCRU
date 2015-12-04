@@ -66,5 +66,9 @@ public class Fachada {
 			
 	}
 	
+	public boolean desativar(String cpf){
+		return this.aluno.desativar(cpf);
+	}
+	
 }
 
