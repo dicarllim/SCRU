@@ -21,9 +21,13 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.JToolBar;
+import javax.swing.UIManager;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaOpAluno extends JFrame {
 
@@ -32,6 +36,8 @@ public class TelaOpAluno extends JFrame {
 	private JTextField valor;
 	
 	public TelaOpAluno() {
+	
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
 		contentPane = new JPanel();
@@ -49,6 +55,56 @@ public class TelaOpAluno extends JFrame {
 		numeroCartao.setBounds(20, 114, 200, 25);
 		contentPane.add(numeroCartao);
 		numeroCartao.setColumns(10);
+		
+		
+		
+		JButton btnSair = new JButton("Logout");
+		btnSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				telaPrincipal.setVisible(true);
+			}
+		});
+		btnSair.setForeground(new Color(169, 169, 169));
+		btnSair.setBackground(UIManager.getColor("Button.background"));
+		btnSair.setBounds(23, 200, 69, 27);
+		contentPane.add(btnSair);
+		
+		JToolBar toolBar = new JToolBar();
+		toolBar.setBounds(0, 0, 40, 16);
+		contentPane.add(toolBar);
+	
+		
+		
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				TelaAdm telaAdm = new TelaAdm();
+				telaAdm.setVisible(true);
+			}
+		});
+		btnVoltar.setForeground(new Color(169, 169, 169));
+		btnVoltar.setBackground(UIManager.getColor("Button.background"));
+		btnVoltar.setBounds(230, 200, 69, 27);
+		contentPane.add(btnVoltar);
+		
+		JToolBar tool = new JToolBar();
+		toolBar.setBounds(0, 0, 40, 16);
+		contentPane.add(toolBar);
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		JButton btnCancelar = new JButton("Pesquisar");
 		btnCancelar.addActionListener(new ActionListener() {

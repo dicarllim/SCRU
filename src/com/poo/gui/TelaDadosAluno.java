@@ -22,19 +22,30 @@ import com.poo.negocios.beans.Aluno;
 
 
 public class TelaDadosAluno <T> extends JFrame {
+	
+	
+
+	
+	
+	
+	
 	private JList listaDeAlunos;
+	private JPanel contentPane;
 	public TelaDadosAluno() {
+		
+			
 		this.setLayout(null);
 		this.setSize(1000,600);
 		listaDeAlunos = new JList();
 		listaDeAlunos.setLayout(null);
-		listaDeAlunos.setSize(1200,1200);
+		listaDeAlunos.setSize(null);
 		listaDeAlunos.setListData(Fachada.getInstance().listarAlunos().toArray());
 		this.add(listaDeAlunos);
 		
 	}
 	
 	public TelaDadosAluno(T objeto ){
+		
 	
 			this.setLayout(null);
 			this.setSize(1000,600);
