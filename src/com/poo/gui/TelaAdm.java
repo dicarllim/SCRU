@@ -6,14 +6,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JToolBar;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.UIManager;
 
 public class TelaAdm extends JFrame {
@@ -44,6 +50,28 @@ public class TelaAdm extends JFrame {
 		btnCadastrarAluno.setForeground(new Color(105, 105, 105));
 		btnCadastrarAluno.setBounds(65, 84, 186, 83);
 		contentPane.add(btnCadastrarAluno);
+		
+		
+		
+		JButton btnDadosAluno = new JButton("Dados ALUNO");
+		btnDadosAluno.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				TelaDadosAluno telaDadosAluno = new TelaDadosAluno();
+				telaDadosAluno.setVisible(true);
+			}
+		});
+		btnDadosAluno.setForeground(new Color(105, 105, 105));
+		btnDadosAluno.setBounds(65, 270, 382, 50);
+		contentPane.add(btnDadosAluno);
+		
+		
+		
+		
+		
+		
+		
 		
 		JButton btnCadastrarGestor = new JButton("CADASTRAR GESTOR");
 		btnCadastrarGestor.addMouseListener(new MouseAdapter() {

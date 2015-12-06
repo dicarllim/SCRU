@@ -64,9 +64,9 @@ public class Aluno extends Pessoa implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Aluno\nNome: " + this.getNome()+ "\nCPF: " + this.getCpf() + 
-				"\nCurso: " + this.getCurso() + 
-				"\nAno de Ingresso: " + this.getAnoIngresso(); 
+		return "Aluno\n Nome: \n" + this.getNome()+ "\n CPF: \n" + this.getCpf() + 
+				"\n Curso: \n" + this.getCurso() + 
+				"\n Ano de Ingresso: \n" + this.getAnoIngresso(); 
 	}
 	
 }
