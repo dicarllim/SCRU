@@ -39,6 +39,13 @@ public class TelaAluno extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel verificarsaldo = new JLabel("SEU SALDO É DE:");
+		verificarsaldo.setLayout(null);
+		verificarsaldo.setVisible(true);
+		verificarsaldo.setBounds(70,70,70,70);
+		this.add(verificarsaldo);
+		verificarsaldo.settext("Saldo : " + this.aluno.getSaldo());
+		
 		JLabel lblSelecioneAOpo = new JLabel("SELECIONE A OPCAO DESEJADA:");
 		lblSelecioneAOpo.setBackground(new Color(165, 42, 42));
 		lblSelecioneAOpo.setForeground(new Color(165, 42, 42));
