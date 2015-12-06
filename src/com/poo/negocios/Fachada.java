@@ -1,5 +1,8 @@
 package com.poo.negocios;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import com.poo.excecoes.NegocioException;
 import com.poo.negocios.beans.Aluno;
 import com.poo.negocios.beans.Gestor;
@@ -80,7 +83,37 @@ public class Fachada {
 	public void atualizarAluno(Aluno aluno) throws NegocioException{
 		this.aluno.atualizarAluno(aluno);
 	}
+	public ArrayList<Aluno> listarAlunos(){
+		return this.aluno.listarAlunos();
+	}
+
+	public Aluno procurarPorParametro(String parametro) throws NegocioException{
+		Aluno resultado = null;
+		if(this.aluno.recebenome(parametro) != null){
+			return this.aluno.recebenome(parametro);
+		}
+		if(this.aluno.recebecpf(parametro) != null){
+			return this.aluno.recebecpf(parametro);
+		}
+		if(this.aluno.recebeint((int) Integer.parseInt(parametro)) != null){
+				
+				return this.aluno.recebeint((int) Integer.parseInt(parametro));
+		}
+		
+		
+		if(resultado != null){
+			return resultado;
+		}
+		else
+			throw new NegocioException("Nenhum resultado encontrado");
+	}
 	
 	
-}
+	
+	
+
+
+
+}	
+
 

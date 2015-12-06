@@ -17,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JToolBar;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -32,6 +34,7 @@ public class TelaAdm extends JFrame {
 	public TelaAdm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
+		setSize(500,500);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(143, 188, 143));
 		contentPane.setBorder(null);
@@ -52,22 +55,19 @@ public class TelaAdm extends JFrame {
 		contentPane.add(btnCadastrarAluno);
 		
 		
-		
-		JButton btnDadosAluno = new JButton("Dados ALUNO");
+
+		JButton btnDadosAluno = new JButton("DADOS ALUNO");
 		btnDadosAluno.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				TelaDadosAluno telaDadosAluno = new TelaDadosAluno();
-				telaDadosAluno.setVisible(true);
+				TelaOpAluno telaOpAluno =  new TelaOpAluno();
+				telaOpAluno.setVisible(true);
 			}
 		});
 		btnDadosAluno.setForeground(new Color(105, 105, 105));
 		btnDadosAluno.setBounds(65, 270, 382, 50);
 		contentPane.add(btnDadosAluno);
-		
-		
-		
 		
 		
 		
@@ -86,6 +86,9 @@ public class TelaAdm extends JFrame {
 		btnCadastrarGestor.setBounds(261, 84, 186, 83);
 		contentPane.add(btnCadastrarGestor);
 		
+		
+		
+		
 		JButton btnDesativarAluno = new JButton("DESATIVAR ALUNO");
 		btnDesativarAluno.addMouseListener(new MouseAdapter() {
 			@Override
@@ -99,6 +102,7 @@ public class TelaAdm extends JFrame {
 		btnDesativarAluno.setBounds(65, 178, 186, 83);
 		contentPane.add(btnDesativarAluno);
 		
+	
 		JButton btnRecarregamento = new JButton("RECARREGAMENTO");
 		btnRecarregamento.addMouseListener(new MouseAdapter() {
 			@Override
@@ -136,7 +140,7 @@ public class TelaAdm extends JFrame {
 		});
 		btnSair.setForeground(new Color(169, 169, 169));
 		btnSair.setBackground(UIManager.getColor("Button.background"));
-		btnSair.setBounds(23, 272, 69, 27);
+		btnSair.setBounds(23, 400, 69, 27);
 		contentPane.add(btnSair);
 		
 		JToolBar toolBar = new JToolBar();

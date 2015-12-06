@@ -123,6 +123,63 @@ public class ControladorAluno {
 		}else{
 			throw new NegocioException("ALUNO INEXISTENTE");
 		}
-	}
 		
-}
+	}
+	public Aluno recebeint(int codigo) throws NegocioException{
+		Aluno buscado= null;
+		 for(int i = 0; i < repositorio.listarAlunos().size();i++){
+			 if(repositorio.listarAlunos().get(i).getNumeroDoCartao()== codigo){
+				 buscado = repositorio.listarAlunos().get(i);
+			 };
+	        }
+		if(buscado != null){
+			return buscado;
+		}
+		
+		else return null;
+		}
+
+	
+	
+	
+	public Aluno recebenome(String nome) throws NegocioException{
+		Aluno busca= null;
+		 for(int i = 0; i < repositorio.listarAlunos().size();i++){
+			 if(repositorio.listarAlunos().get(i).getNome().equals(nome.trim())){
+				 busca = repositorio.listarAlunos().get(i);
+			 };
+	        }
+		if(busca != null){
+			return busca;
+		}
+		
+		else return null;
+		}
+	
+	
+	
+	public Aluno recebecpf(String cpf) throws NegocioException{
+		Aluno busca= null;
+		 for(int i = 0; i < repositorio.listarAlunos().size();i++){
+			 if(repositorio.listarAlunos().get(i).getCpf().equals(cpf.trim())){
+				 busca = repositorio.listarAlunos().get(i);
+			 };
+	        }
+		if(busca != null){
+			return busca;
+		}
+		
+		else return null;
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+	
+ 		
+

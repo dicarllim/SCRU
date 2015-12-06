@@ -29,7 +29,7 @@ public class TelaAluno extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaAluno(Aluno aluno) {
+	public TelaAluno(final Aluno aluno) {
 		this.aluno = aluno;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
@@ -42,9 +42,9 @@ public class TelaAluno extends JFrame {
 		JLabel verificarsaldo = new JLabel("SEU SALDO É DE:");
 		verificarsaldo.setLayout(null);
 		verificarsaldo.setVisible(true);
-		verificarsaldo.setBounds(70,70,70,70);
+		verificarsaldo.setBounds(70,70, 70,70);
 		this.add(verificarsaldo);
-		verificarsaldo.settext("Saldo : " + this.aluno.getSaldo());
+		verificarsaldo.setText("Saldo:  " + this.aluno.getSaldo());
 		
 		JLabel lblSelecioneAOpo = new JLabel("SELECIONE A OPCAO DESEJADA:");
 		lblSelecioneAOpo.setBackground(new Color(165, 42, 42));
@@ -98,4 +98,5 @@ public class TelaAluno extends JFrame {
 		btnAlmoor.setBounds(96, 121, 335, 58);
 		contentPane.add(btnAlmoor);
 	}
+
 }
