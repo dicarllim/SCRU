@@ -63,9 +63,12 @@ public class TelaOpAluno extends JFrame {
 					TelaDadosAluno<String> telaDadosAluno = new TelaDadosAluno<String>(e1.getMessage());
 					telaDadosAluno.setVisible(true);
 					setVisible(false);
-				}
+				}catch(NumberFormatException e2){
+					TelaDadosAluno<String> telaDadosAluno = new TelaDadosAluno<String>("nenhum resultado encontrado");
+					telaDadosAluno.setVisible(true);
+					setVisible(false);
 
-				
+				}
 				}
 			
 		})
