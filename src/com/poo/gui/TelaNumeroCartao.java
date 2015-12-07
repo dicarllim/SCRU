@@ -21,10 +21,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class TelaNumeroCartao extends JFrame {
-
+	private static TelaNumeroCartao instance = null;
 	private JPanel contentPane;
 	private JTextField numeroCartao;
 
+	public static TelaNumeroCartao getInstance(){
+		if (instance == null){
+			instance = new TelaNumeroCartao();
+		}
+		return instance;
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -45,6 +51,7 @@ public class TelaNumeroCartao extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaNumeroCartao() {
+		setTitle("Aluno - N\u00FAmero do Cart\u00E3o");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
 		contentPane = new JPanel();
@@ -70,9 +77,8 @@ public class TelaNumeroCartao extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try{
 					int numero = (int) Integer.parseInt(numeroCartao.getText());
-					TelaAluno telaAluno = new TelaAluno(Fachada.getInstance().loginAluno(numero));
+					TelaAluno.getInstance(Fachada.getInstance().loginAluno(numero)).setVisible(true);
 					setVisible(false);
-					telaAluno.setVisible(true);
 				} catch (NegocioException e2){
 					JOptionPane.showMessageDialog(null, e2.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -87,8 +93,7 @@ public class TelaNumeroCartao extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
-				telaPrincipal.setVisible(true);
+				TelaNumeroCartao.getInstance().setVisible(true);
 			}
 		});
 		btnCancelar.setForeground(new Color(119, 136, 153));

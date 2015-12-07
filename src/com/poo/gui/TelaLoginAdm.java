@@ -25,14 +25,22 @@ import java.awt.event.ActionEvent;
 
 public class TelaLoginAdm extends JFrame {
 
+	private static TelaLoginAdm instance = null;
 	private JPanel contentPane;
 	private JTextField loginTexto;
 	private JPasswordField senhaTexto;
 
+	public static TelaLoginAdm getInstance(){
+		if (instance == null){
+			instance = new TelaLoginAdm();
+		}
+		return instance;
+	}
 	/**
 	 * Create the frame.
 	 */
 	public TelaLoginAdm() {
+		setTitle("SCRU - Login Adm");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
 		contentPane = new JPanel();
@@ -76,8 +84,7 @@ public class TelaLoginAdm extends JFrame {
 					try {
 						if(Fachada.getInstance().loginGestor(usuario, senha)){
 							setVisible(false);
-							TelaAdm telaAdm = new TelaAdm();
-							telaAdm.setVisible(true);
+							TelaAdm.getInstance().setVisible(true);
 						}
 					} catch (NegocioException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -92,8 +99,7 @@ public class TelaLoginAdm extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
-				telaPrincipal.setVisible(true);
+				TelaPrincipal.getInstance().setVisible(true);
 			}
 		});
 		btnCancelar.setForeground(new Color(165, 42, 42));

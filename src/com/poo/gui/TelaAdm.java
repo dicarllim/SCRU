@@ -26,15 +26,23 @@ import javax.swing.UIManager;
 
 public class TelaAdm extends JFrame {
 
+	private static TelaAdm instance = null;
 	private JPanel contentPane;
 
+	public static TelaAdm getInstance(){
+		if (instance == null){
+			instance = new TelaAdm();
+		}
+		return instance;
+	}
 	/**
 	 * Create the frame.
 	 */
 	public TelaAdm() {
+		setTitle("Adm - Portal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
-		setSize(500,500);
+		setSize(564,362);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(143, 188, 143));
 		contentPane.setBorder(null);
@@ -46,14 +54,12 @@ public class TelaAdm extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				TelaCadastroAluno telaCadastroAluno = new TelaCadastroAluno();
-				telaCadastroAluno.setVisible(true);
+				TelaCadastroAluno.getInstance().setVisible(true);
 			}
 		});
 		btnCadastrarAluno.setForeground(new Color(105, 105, 105));
-		btnCadastrarAluno.setBounds(65, 84, 186, 83);
+		btnCadastrarAluno.setBounds(35, 104, 157, 63);
 		contentPane.add(btnCadastrarAluno);
-		
 		
 
 		JButton btnDadosAluno = new JButton("DADOS ALUNO");
@@ -61,16 +67,12 @@ public class TelaAdm extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				TelaOpAluno telaOpAluno =  new TelaOpAluno();
-				telaOpAluno.setVisible(true);
+				TelaConsultarAluno.getInstance().setVisible(true);
 			}
 		});
 		btnDadosAluno.setForeground(new Color(105, 105, 105));
-		btnDadosAluno.setBounds(65, 270, 382, 50);
+		btnDadosAluno.setBounds(380, 104, 146, 63);
 		contentPane.add(btnDadosAluno);
-		
-		
-		
 		
 		
 		JButton btnCadastrarGestor = new JButton("CADASTRAR GESTOR");
@@ -78,28 +80,24 @@ public class TelaAdm extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				setVisible(false);
-				TelaCadastroGestor telaCadastroGestor = new TelaCadastroGestor();
-				telaCadastroGestor.setVisible(true);
+				TelaCadastroGestor.getInstance().setVisible(true);
 			}
 		});
 		btnCadastrarGestor.setForeground(new Color(105, 105, 105));
-		btnCadastrarGestor.setBounds(261, 84, 186, 83);
+		btnCadastrarGestor.setBounds(202, 104, 168, 63);
 		contentPane.add(btnCadastrarGestor);
-		
-		
-		
+	
 		
 		JButton btnDesativarAluno = new JButton("DESATIVAR ALUNO");
 		btnDesativarAluno.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				TelaDesativarAluno telaDesativarAluno = new TelaDesativarAluno();
-				telaDesativarAluno.setVisible(true);
+				TelaDesativarAluno.getInstance().setVisible(true);
 			}
 		});
 		btnDesativarAluno.setForeground(new Color(105, 105, 105));
-		btnDesativarAluno.setBounds(65, 178, 186, 83);
+		btnDesativarAluno.setBounds(35, 193, 157, 63);
 		contentPane.add(btnDesativarAluno);
 		
 	
@@ -108,43 +106,37 @@ public class TelaAdm extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				TelaRecarga telaRecarga = new TelaRecarga();
-				telaRecarga.setVisible(true);
+				TelaRecarga.getInstance().setVisible(true); 
 			}
 		});
 		btnRecarregamento.setForeground(new Color(105, 105, 105));
-		btnRecarregamento.setBounds(261, 178, 186, 83);
+		btnRecarregamento.setBounds(202, 193, 168, 63);
 		contentPane.add(btnRecarregamento);
 		
 		JLabel lblPortalDoAdministrador = new JLabel("PORTAL DO ADMINISTRADOR");
 		lblPortalDoAdministrador.setForeground(new Color(0, 0, 0));
 		lblPortalDoAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPortalDoAdministrador.setBounds(109, 47, 289, 16);
+		lblPortalDoAdministrador.setBounds(141, 50, 289, 16);
 		contentPane.add(lblPortalDoAdministrador);
 		
 		JLabel lblRestauranteUniversitrioUfrpe = new JLabel("RESTAURANTE UNIVERSITARIO UFRPE");
 		lblRestauranteUniversitrioUfrpe.setBackground(new Color(220, 220, 220));
 		lblRestauranteUniversitrioUfrpe.setForeground(new Color(255, 255, 255));
 		lblRestauranteUniversitrioUfrpe.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		lblRestauranteUniversitrioUfrpe.setBounds(156, 31, 199, 16);
+		lblRestauranteUniversitrioUfrpe.setBounds(183, 32, 199, 16);
 		contentPane.add(lblRestauranteUniversitrioUfrpe);
 		
-		JButton btnSair = new JButton("Logout");
+		JButton btnSair = new JButton("LOGOUT");
 		btnSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
-				telaPrincipal.setVisible(true);
+				TelaPrincipal.getInstance().setVisible(true);
 			}
 		});
-		btnSair.setForeground(new Color(169, 169, 169));
+		btnSair.setForeground(new Color(128, 128, 128));
 		btnSair.setBackground(UIManager.getColor("Button.background"));
-		btnSair.setBounds(23, 400, 69, 27);
+		btnSair.setBounds(380, 193, 146, 63);
 		contentPane.add(btnSair);
-		
-		JToolBar toolBar = new JToolBar();
-		toolBar.setBounds(0, 0, 87, 16);
-		contentPane.add(toolBar);
 	}
 }

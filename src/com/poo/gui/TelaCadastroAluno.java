@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaCadastroAluno extends JFrame {
 
+	private static TelaCadastroAluno instance = null;
 	private JPanel contentPane;
 	private JTextField Nome;
 	private JTextField CPF;
@@ -37,10 +38,17 @@ public class TelaCadastroAluno extends JFrame {
 	private JTextField Curso;
 	private JLabel label;
 
+	public static TelaCadastroAluno getInstance(){
+		if(instance == null){
+			instance = new TelaCadastroAluno();
+		}
+		return instance;
+	}
 	/**
 	 * Create the frame.
 	 */
 	public TelaCadastroAluno() {
+		setTitle("Adm - Cadastro Aluno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 528, 354);
 		contentPane = new JPanel();
@@ -95,8 +103,7 @@ public class TelaCadastroAluno extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				TelaAdm telaAdm = new TelaAdm();
-				telaAdm.setVisible(true);
+				TelaAdm.getInstance().setVisible(true);
 			}
 		});
 		btnCancelar.setBounds(60, 255, 85, 29);

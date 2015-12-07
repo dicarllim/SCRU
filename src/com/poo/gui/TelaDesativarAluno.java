@@ -22,13 +22,21 @@ import java.awt.event.ActionEvent;
 
 public class TelaDesativarAluno extends JFrame {
 
+	private static TelaDesativarAluno instance = null;
 	private JPanel contentPane;
 	private JTextField cpf;
 
+	public static TelaDesativarAluno getInstance(){
+		if (instance == null){
+			instance = new TelaDesativarAluno();
+		}
+		return instance;
+	}
 	/**
 	 * Create the frame.
 	 */
 	public TelaDesativarAluno() {
+		setTitle("Adm - Desativar Aluno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 463, 301);
 		contentPane = new JPanel();
@@ -55,8 +63,7 @@ public class TelaDesativarAluno extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				TelaAdm telaAdm = new TelaAdm();
-				telaAdm.setVisible(true);
+				TelaAdm.getInstance().setVisible(true);
 			}
 		});
 		btnCancelar.setBounds(113, 196, 117, 29);

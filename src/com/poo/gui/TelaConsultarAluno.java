@@ -29,17 +29,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class TelaOpAluno extends JFrame {
+public class TelaConsultarAluno extends JFrame {
 
+	private static TelaConsultarAluno instance = null;
 	private JPanel contentPane;
 	private JTextField numeroCartao;
 	private JTextField valor;
 	
-	public TelaOpAluno() {
+	public static TelaConsultarAluno getInstance(){
+		if (instance == null){
+			instance = new TelaConsultarAluno();
+		}
+		return instance;
+	}
+	
+	public TelaConsultarAluno() {
+		setTitle("Adm - Consultar Aluno");
 	
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 512, 345);
+		setBounds(100, 100, 512, 267);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(143, 188, 143));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -47,66 +56,34 @@ public class TelaOpAluno extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblRecarregarCarto = new JLabel("Informe cpf ou nome ou número do cartão: ");
-		lblRecarregarCarto.setFont(new Font("Georgia", Font.BOLD, 20));
-		lblRecarregarCarto.setBounds(10, 80, 500, 25);
+		lblRecarregarCarto.setBounds(84, 63, 328, 25);
+		lblRecarregarCarto.setForeground(Color.DARK_GRAY);
+		lblRecarregarCarto.setFont(new Font("Consolas", Font.BOLD, 15));
 		contentPane.add(lblRecarregarCarto);
 		
 		numeroCartao = new JTextField();
-		numeroCartao.setBounds(20, 114, 200, 25);
+		numeroCartao.setBounds(68, 99, 367, 25);
 		contentPane.add(numeroCartao);
 		numeroCartao.setColumns(10);
-		
-		
-		
-		JButton btnSair = new JButton("Logout");
-		btnSair.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
-				telaPrincipal.setVisible(true);
-			}
-		});
-		btnSair.setForeground(new Color(169, 169, 169));
-		btnSair.setBackground(UIManager.getColor("Button.background"));
-		btnSair.setBounds(23, 200, 69, 27);
-		contentPane.add(btnSair);
-		
-		JToolBar toolBar = new JToolBar();
-		toolBar.setBounds(0, 0, 40, 16);
-		contentPane.add(toolBar);
-	
-		
-		
+
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBounds(147, 136, 98, 27);
 		btnVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				TelaAdm telaAdm = new TelaAdm();
-				telaAdm.setVisible(true);
+				TelaAdm.getInstance().setVisible(true);
 			}
 		});
-		btnVoltar.setForeground(new Color(169, 169, 169));
+		btnVoltar.setForeground(Color.BLACK);
 		btnVoltar.setBackground(UIManager.getColor("Button.background"));
-		btnVoltar.setBounds(230, 200, 69, 27);
 		contentPane.add(btnVoltar);
 		
 		JToolBar tool = new JToolBar();
-		toolBar.setBounds(0, 0, 40, 16);
-		contentPane.add(toolBar);
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		JButton btnCancelar = new JButton("Pesquisar");
+		btnCancelar.setBounds(255, 135, 95, 29);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -116,29 +93,28 @@ public class TelaOpAluno extends JFrame {
 					telaDadosAluno.setVisible(true);
 					setVisible(false);
 				}catch(NegocioException e1){
+					TelaDadosAluno.getInstance().setVisible(true);
 					TelaDadosAluno<String> telaDadosAluno = new TelaDadosAluno<String>(e1.getMessage());
 					telaDadosAluno.setVisible(true);
 					setVisible(false);
 				}catch(NumberFormatException e2){
-					TelaDadosAluno<String> telaDadosAluno = new TelaDadosAluno<String>("nenhum resultado encontrado");
-					telaDadosAluno.setVisible(true);
-					setVisible(false);
-
+					JOptionPane.showMessageDialog(null, "Nenhum resultado encontrado", "", JOptionPane.ERROR_MESSAGE);
+					limpar();
 				}
 				}
 			
 		})
 		
 		;
-		btnCancelar.setBounds(250, 112, 95, 29);
 		contentPane.add(btnCancelar);
-	
-	
-	
-	
+		
+		JLabel lblConsultarDadosDo = new JLabel("Consultar Dados do Aluno");
+		lblConsultarDadosDo.setBounds(106, 11, 281, 25);
+		lblConsultarDadosDo.setFont(new Font("Consolas", Font.PLAIN, 20));
+		contentPane.add(lblConsultarDadosDo);
 	}
 	
-	
-	
-	
+	private void limpar(){
+		numeroCartao.setText("");
+	}
 }

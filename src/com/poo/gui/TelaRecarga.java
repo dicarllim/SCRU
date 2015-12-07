@@ -23,14 +23,23 @@ import java.awt.event.ActionEvent;
 
 public class TelaRecarga extends JFrame {
 
+	private static TelaRecarga instance = null;
 	private JPanel contentPane;
 	private JTextField numeroCartao;
 	private JTextField valor;
+	
+	public static TelaRecarga getInstance(){
+		if (instance == null){
+			instance = new TelaRecarga();
+		}
+		return instance;
+	}
 
 	/**
 	 * Create the frame.
 	 */
 	public TelaRecarga() {
+		setTitle("Adm - Recarregar Cart\u00E3o");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
 		contentPane = new JPanel();
@@ -66,8 +75,7 @@ public class TelaRecarga extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				TelaAdm telaAdm = new TelaAdm();
-				telaAdm.setVisible(true);
+				TelaAdm.getInstance().setVisible(true);
 			}
 		});
 		btnCancelar.setBounds(72, 215, 117, 29);
@@ -91,8 +99,7 @@ public class TelaRecarga extends JFrame {
 					Fachada.getInstance().creditar(codigo, valor1);
 					JOptionPane.showMessageDialog(null, "Recarga feita com sucesso!", "Recarga", JOptionPane.INFORMATION_MESSAGE);
 					limpar();
-					TelaAdm telaAdm = new TelaAdm();
-					telaAdm.setVisible(true);
+					TelaAdm.getInstance().setVisible(true);
 				}catch(NegocioException e1){
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 				}

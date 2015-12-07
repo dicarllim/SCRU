@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
@@ -18,9 +19,16 @@ import java.awt.event.MouseEvent;
 import javax.swing.UIManager;
 
 public class TelaPrincipal extends JFrame {
-
+	private static TelaPrincipal instance = null;
 	private JPanel contentPane;
 
+	public static TelaPrincipal getInstance(){
+		if (instance == null){
+			instance = new TelaPrincipal();
+		}
+		return instance;
+	}
+	
 	/**
 	 * Launch the application.
 	 */
@@ -41,6 +49,7 @@ public class TelaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPrincipal() {
+		setTitle("SCRU");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
 		contentPane = new JPanel();
@@ -59,8 +68,7 @@ public class TelaPrincipal extends JFrame {
 		btnAlunoUfrpe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				TelaNumeroCartao telaNumeroCartao =  new TelaNumeroCartao();
-				telaNumeroCartao.setVisible(true);
+				TelaNumeroCartao.getInstance().setVisible(true);
 			}
 		});
 		btnAlunoUfrpe.setForeground(new Color(244, 164, 96));
@@ -73,8 +81,7 @@ public class TelaPrincipal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				setVisible(false);
-				TelaLoginAdm telaLoginAdm = new TelaLoginAdm();
-				telaLoginAdm.setVisible(true);
+				TelaLoginAdm.getInstance().setVisible(true);
 			}
 		});
 		btnAdministrador.setForeground(new Color(178, 34, 34));
@@ -87,4 +94,5 @@ public class TelaPrincipal extends JFrame {
 		lblUfrpe.setBounds(223, 103, 71, 16);
 		contentPane.add(lblUfrpe);
 	}
+
 }

@@ -15,14 +15,20 @@ import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 
 public class TelaSaldo extends JFrame {
-
+	private static TelaSaldo instance = null;
 	private JPanel contentPane;
 
-
+	public static TelaSaldo getInstance(double saldo){
+		if (instance == null){
+			instance = new TelaSaldo(saldo);
+		}
+		return instance;
+	}
 	/**
 	 * Create the frame.
 	 */
 	public TelaSaldo(double saldo) {
+		setTitle("Aluno - Saldo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
 		contentPane = new JPanel();
@@ -57,8 +63,7 @@ public class TelaSaldo extends JFrame {
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
-				telaPrincipal.setVisible(true);
+				TelaPrincipal.getInstance().setVisible(true);
 			}
 		});
 		btnSair.setForeground(new Color(169, 169, 169));

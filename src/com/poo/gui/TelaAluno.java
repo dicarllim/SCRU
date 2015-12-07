@@ -23,13 +23,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class TelaAluno extends JFrame {
-
+	private static TelaAluno instance = null;
 	private JPanel contentPane;
 	private Aluno aluno;
+	
+	public static TelaAluno getInstance(Aluno aluno){
+		if (instance == null){
+			instance = new TelaAluno(aluno);
+		}
+		return instance;
+	}
 	/**
 	 * Create the frame.
 	 */
 	public TelaAluno(final Aluno aluno) {
+		setTitle("Aluno - Sele\u00E7\u00E3o da Refei\u00E7\u00E3o");
 		this.aluno = aluno;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
@@ -40,17 +48,18 @@ public class TelaAluno extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel verificarsaldo = new JLabel("SEU SALDO É DE:");
+		verificarsaldo.setFont(new Font("Consolas", Font.PLAIN, 12));
 		verificarsaldo.setLayout(null);
 		verificarsaldo.setVisible(true);
-		verificarsaldo.setBounds(70,70, 70,70);
-		this.add(verificarsaldo);
-		verificarsaldo.setText("Saldo:  " + this.aluno.getSaldo());
+		verificarsaldo.setBounds(97,64, 130,70);
+		getContentPane().add(verificarsaldo);
+		verificarsaldo.setText("Saldo Atual:  0.0");
 		
 		JLabel lblSelecioneAOpo = new JLabel("SELECIONE A OPCAO DESEJADA:");
 		lblSelecioneAOpo.setBackground(new Color(165, 42, 42));
 		lblSelecioneAOpo.setForeground(new Color(165, 42, 42));
 		lblSelecioneAOpo.setFont(new Font("Consolas", Font.BOLD, 18));
-		lblSelecioneAOpo.setBounds(126, 73, 270, 36);
+		lblSelecioneAOpo.setBounds(125, 40, 270, 36);
 		contentPane.add(lblSelecioneAOpo);
 		
 		JButton btnJantarr = new JButton("JANTAR (R$1,50)");
@@ -59,9 +68,8 @@ public class TelaAluno extends JFrame {
 				try{
 					Fachada.getInstance().debitar(aluno.getNumeroDoCartao(), 1.5);
 					Fachada.getInstance().atualizarAluno(aluno);
-					TelaSaldo telaSaldo = new TelaSaldo(aluno.getSaldo());
+					TelaSaldo.getInstance(aluno.getSaldo()).setVisible(true);
 					setVisible(false);
-					telaSaldo.setVisible(true);
 				}catch(NegocioException e2){
 					JOptionPane.showMessageDialog(null, e2.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -77,9 +85,8 @@ public class TelaAluno extends JFrame {
 				try{
 					Fachada.getInstance().debitar(aluno.getNumeroDoCartao(), 2.0);
 					Fachada.getInstance().atualizarAluno(aluno);
-					TelaSaldo telaSaldo = new TelaSaldo(aluno.getSaldo());
+					TelaSaldo.getInstance(aluno.getSaldo()).setVisible(true);
 					setVisible(false);
-					telaSaldo.setVisible(true);
 				}catch(NegocioException e2){
 					JOptionPane.showMessageDialog(null, e2.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -90,13 +97,12 @@ public class TelaAluno extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				TelaSaldo telaSaldo = new TelaSaldo(aluno.getSaldo());
-				telaSaldo.setVisible(true);
+				TelaSaldo.getInstance(aluno.getSaldo()).setVisible(true);
 			}
 		});
 		btnAlmoor.setForeground(new Color(112, 128, 144));
 		btnAlmoor.setBounds(96, 121, 335, 58);
 		contentPane.add(btnAlmoor);
 	}
-
+	
 }

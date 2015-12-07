@@ -24,15 +24,24 @@ import java.awt.event.ActionEvent;
 
 public class TelaCadastroGestor extends JFrame {
 
+	private static TelaCadastroGestor instance = null;
 	private JPanel contentPane;
 	private JTextField nome;
 	private JTextField cpf;
 	private JPasswordField senha;
+	
+	public static TelaCadastroGestor getInstance(){
+		if (instance == null){
+			instance = new TelaCadastroGestor();
+		}
+		return instance;
+	}
 
 	/**
 	 * Create the frame.
 	 */
 	public TelaCadastroGestor() {
+		setTitle("Adm - Cadastro Gestor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 345);
 		contentPane = new JPanel();
@@ -72,8 +81,7 @@ public class TelaCadastroGestor extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				TelaAdm telaAdm = new TelaAdm();
-				telaAdm.setVisible(true);
+				TelaAdm.getInstance().setVisible(true);
 			}
 		});
 		btnCancelar.setBounds(64, 234, 117, 29);
