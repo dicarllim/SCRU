@@ -10,6 +10,7 @@ import com.poo.excecoes.CursoInvalidoException;
 import com.poo.excecoes.StatusInvalidoException;
 
 public class Aluno extends Pessoa implements Serializable{
+	private long codigo;
 	private int status;//1- Aluno Ativo || 0 - Aluno Desativado
 	private String curso;
 	DecimalFormat df = new DecimalFormat("0.0");
@@ -17,8 +18,9 @@ public class Aluno extends Pessoa implements Serializable{
 	private boolean residente;
 	
 	//implementar foto
-	public Aluno(String nome, String cpf, int status, String curso, float anoIngresso) throws CpfInvalidoException, StatusInvalidoException, CursoInvalidoException, AnoIngressoInvalidoException{
+	public Aluno(long codigo, String nome, String cpf, int status, String curso, float anoIngresso) throws CpfInvalidoException, StatusInvalidoException, CursoInvalidoException, AnoIngressoInvalidoException{
 		super(nome, cpf);
+		this.setCodigo(codigo);
 		this.setStatus(status);
 		this.setCurso(curso);
 		this.setAnoIngresso(anoIngresso);
@@ -33,6 +35,13 @@ public class Aluno extends Pessoa implements Serializable{
 	 * @param status define se o estudante é regular(1) ou desativado (0)	
 	 * 
 	 */
+	
+	public long getCodigo(){
+		return this.codigo;
+	}
+	public void setCodigo(long codigo){
+		this.codigo = codigo;
+	}
 	public void setStatus(int status) throws StatusInvalidoException{
 		if(status == 0 || status == 1){
 			this.status = status;

@@ -16,10 +16,10 @@ public class Teste {
 	
 	//Cartao a1 = new Cartao("10/20/15", "01/11/11", 0, 1);
 	//Aluno a = new Aluno("Thiago", "09198875469", a1, 1);
-	RepositorioAluno teste = new RepositorioAluno();
+	//RepositorioAluno teste = new RepositorioAluno();
 	//teste.inserirAluno(a);
 	
-	teste.listarAlunos();
+	//teste.listarAlunos();
 	
 	
 	

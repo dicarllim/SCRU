@@ -1,4 +1,4 @@
-package com.poo.negocios;
+package com.poo.negocios.controladores;
 
 import java.io.IOException;
 
@@ -20,11 +20,18 @@ public class CadastroAluno {
 	}
 	
 	public void cadastrar(Aluno aluno)throws IOException, CadastroAlunoExistenteException{
-		this.repositorio.inserirAluno(aluno);
+		if(this.repositorio.existe(aluno)){
+			//fazer as outras verificações aqui, inclusive dos atributos da classe pessoa
+		      this.repositorio.inserirAluno(aluno);
+		}
+		else
+		  throw new CadastroAlunoExistenteException(aluno.getNome());
 	}
 	
 	public Aluno[] listarAlunos() throws IOException{
 		return this.repositorio.listarAlunos();
 	}
-	
+	private static long gerarCodigo(Aluno aluno ){
+		return aluno.hashCode();
+	}
 }

@@ -1,4 +1,4 @@
-package com.poo.negocios;
+package com.poo.negocios.controladores;
 
 import java.io.IOException;
 
